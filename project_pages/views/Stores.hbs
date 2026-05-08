@@ -1,0 +1,84 @@
+<h1>Stores</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each Customers.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    {{!--
+        <tr>
+            {{#each Stores.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+        --}}
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, location_name, and total_transaction_count }}
+                 </button>
+             {{#each Stores}}
+        <tr>
+            <td>{{this.location_ID}}</td>
+            <td>{{this.location_name}}</td>
+            <td>{{this.total_transaction_count}}</td>
+           
+
+            {{! DELETE form }}
+            <form id='delete_person_form'>
+                <input type='hidden' name='delete_person_id' value='{{this.customer_ID}}' />
+                <input type='hidden' name='delete_person_name' value='{{this.first_name}} {{this.last_name}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+              </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Store</h2>
+<form class='cuForm' id='create_store_form'>
+    <label for='create_store_locationname'>Location Name: </label>
+    <input type='text' name='create_location_name' id='create_location_name' required />
+
+    <label for='create_transaction_count'>Total Transaction Count: </label>
+    <input type='text' name='create_transaction_count' id='create_transaction_count' />
+
+    <input type='submit' /> 
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Person</h2>
+<form class='cuForm' id='update_store_form'>
+    <label for='update_location_id'>Person to Update: </label>
+    <select name='update_location_id' id='update_location_id' required>
+        <option value='' disabled selected>Select a Location</option>
+        {{#each Customers}}
+        <option value='{{this.customer_ID}}' required>
+            {{this.location_ID}}
+            
+            {{this.location_name}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for="update_location_name">Location Name:</label>
+    <input type='text' name='create_location_name' id='create_location_name' />
+
+    <label for="update_transaction_count">Total Transaction Count:</label>
+    <input type='text' name='create_transaction_count' id='create_transaction_count' />
+    <input type='submit' />
+</form>

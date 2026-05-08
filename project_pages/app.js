@@ -88,8 +88,47 @@ app.get('/Orders', async function (req, res) {
             }
 });
 
-
+app.get('/Stores', async function (req, res) {
+    try {
         
+        // Define our queries
+        const query1 = `SELECT Stores.location_ID, Stores.location_name, Stores.total_transaction_count FROM Stores;`;
+        
+        const [Stores] = await db.query(query1); // Store the results
+        
+        // Send the results to the browser
+        res.render('Stores', { Customers: Customers});
+    } catch (error) {
+        console.error("Error executing queries:", error);
+
+        // Send a generic error message to the browser
+        res.status(500).send("An error occurred while executing the database queries.");
+    }
+});
+        
+/*app.get('/Items', async function (req, res) {
+    try {
+        const query1 = `SELECT Items.item_ID, Items.item_cost, Items.item_name,
+
+            LEFT JOIN Items ON Items.location_ID = Stores.location_ID;`;
+            
+        const [Items] = await db.query(query1);
+        const query2 = 'SELECT Stores.location_name FROM Stores;';
+            
+        const [locations] = await db.query(query2);
+      
+
+        // Render the bsg-people.hbs file, and also send the renderer
+        //  an object that contains our bsg_people and bsg_homeworld information
+        res.render('Items', { Items: Items, locations:locations});
+            } catch (error) {
+                console.error('Error executing queries:', error);
+                // Send a generic error message to the browser
+                res.status(500).send(
+                    'An error occurred while executing the database queries.'
+                );
+            }
+});*/
 
 // ########################################
 // ########## LISTENER

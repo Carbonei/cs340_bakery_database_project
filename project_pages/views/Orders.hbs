@@ -1,5 +1,5 @@
 <h1>Orders</h1>
-
+{{! Citation: Adapted from Web Exploration Module (link when canvas is accessable) }}
 {{! READ table }}
 <table>
     <thead>
@@ -12,20 +12,11 @@
             {{/each}}
             <th></th>
         </tr>
-    {{!--
-        <tr>
-            {{#each Stores.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th></th>
-        </tr>
-        --}}
+
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! For each row, print the id, cost, count, first name, last name, and location }}
                  </button>
              {{#each Orders}}
         <tr>
@@ -64,7 +55,7 @@
     <input type='text' name='create_order_count' id='create_order_lname' />
 
     <label for='create_order_age'>Customer Name:</label>
-    <select name='update_customer_id' id='update_customer_id' required>
+    <select name='create_customer_id' id='create_customer_id' required>
         <option value='' disabled selected>Select a Customer</option>
         {{#each Orders}}
         <option value='{{this.customer_ID}}' required>
@@ -93,7 +84,7 @@
 <form class='cuForm' id='update_order_form'>
     <label for='update_order_id'>Order to Update: </label>
     <select name='update_order_id' id='update_order_id' required>
-        <option value='' disabled selected>Select an Order to Update</option>
+        <option value='' disabled selected>Select an Order</option>
         {{#each Orders}}
         <option value='{{this.order_ID}}' required>
             {{this.order_ID}}

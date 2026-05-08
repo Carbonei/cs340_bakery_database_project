@@ -1,4 +1,5 @@
 <h1>Customers</h1>
+{{! Citation: Adapted from Web Exploration Module (link when canvas is accessable) }}
 
 {{! READ table }}
 <table>
@@ -12,20 +13,11 @@
             {{/each}}
             <th></th>
         </tr>
-    {{!--
-        <tr>
-            {{#each Stores.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th></th>
-        </tr>
-        --}}
+
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! For each row, print the ID, first name, last name, and email }}
                  </button>
              {{#each Customers}}
         <tr>
@@ -47,27 +39,7 @@
             </form>
         </tr>
         {{/each}}
-        {{!--
-
-        {{! For each row, print the id, fname, lname, homeworld and age }}
-                 </button>
-             {{#each Stores}}
-        <tr>
-            
-            <td>{{this.location_name}}</td>
-            <td>{{this.location_ID}}</td>
-
-            {{! DELETE form }}
-            <form id='delete_customer_form'>
-                <input type='hidden' name='delete_customer_name' value='{{this.location_name}}' />
-                <td>
-                    <button type='submit'>
-                        Delete
-              </td>
-            </form>
-        </tr>
-        {{/each}}
-        --}}
+        
         
     </tbody>
 </table>
@@ -80,16 +52,7 @@
 
     <label for='create_customer_lname'>Last Name: </label>
     <input type='text' name='create_customer_lname' id='create_customer_lname' />
- {{!--
-    <label for='create_customer_homeworld'>Store: </label>
-    <select name='create_customer_homeworld' id='create_customer_homeworld'>
-        <option value='NULL' selected>Select a store location</option>
-        <option value='NULL'>&lt; None &gt;</option>
-        {{#each Stores}}
-        <option value='{{this.customer_ID}}' required>{{this.location_name}}</option>
-        {{/each}}
-    </select>
-    --}}
+ 
 
     <label for='create_customer_age'>Email:</label>
     <input type='text' name='create_customer_email' id='create_customer_email' />
@@ -114,13 +77,13 @@
     </select>
     
     <label for='update_customer_email'>First Name:</label>
-    <input type='text' name='create_customer_first_name' id='create_customer_first_name' />
+    <input type='text' name='update_customer_first_name' id='update_customer_first_name' />
 
     <label for='update_customer_email'>Last Name:</label>
-    <input type='text' name='create_customer_last_name' id='create_customer_last_name' />
+    <input type='text' name='update_customer_last_name' id='update_customer_last_name' />
 
     <label for='update_customer_age'>Email: </label>
-    <input type='text' name='create_customer_email' id='create_customer_email' />
+    <input type='text' name='update_customer_email' id='update_customer_email' />
 
     <input type='submit' />
 </form>

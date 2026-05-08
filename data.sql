@@ -42,6 +42,7 @@ CREATE TABLE Orders (
     customer_ID int(11) NOT NULL,
     order_cost decimal(10, 2) NOT NULL,
     item_count int(11) NOT NULL,
+    pickup date,
     location_ID int(11) NOT NULL,
     UNIQUE KEY (order_ID), 
     PRIMARY KEY (order_ID),
@@ -49,10 +50,10 @@ CREATE TABLE Orders (
     FOREIGN KEY (location_ID) REFERENCES Stores(location_ID)
 );
 
-INSERT INTO Orders (customer_ID, order_cost, item_count, location_ID)
-VALUES (3, 5, 2, 2),
-(1, 6, 2, 3),
-(2, 3, 1, 1);
+INSERT INTO Orders (customer_ID, order_cost, item_count, pickup, location_ID)
+VALUES ((SELECT customer_ID FROM Customers WHERE first_name='Kate' AND last_name = 'Whitaker'), 5, 2, '2026-06-28', (SELECT location_ID FROM Stores WHERE location_name='Cedar Street')),
+((SELECT customer_ID FROM Customers WHERE first_name='Taylor' AND last_name = 'Murray'), 6, 2, '2026-07-11', (SELECT location_ID FROM Stores WHERE location_name='Oak Place')),
+((SELECT customer_ID FROM Customers WHERE first_name='Jeremy' AND last_name = 'Grant'), 3, 1, '2026-05-30', (SELECT location_ID FROM Stores WHERE location_name='Maple Avenue'));
 
 CREATE TABLE Items (
     item_ID int(11) NOT NULL AUTO_INCREMENT, 
@@ -65,11 +66,11 @@ CREATE TABLE Items (
 );
 
 INSERT INTO Items (item_cost, item_name, location_ID)
-VALUES (2, 'Chocolate Chip Cookie', 2),
-(3, 'Red Velvet Cupcake', 1),
-(4, 'Bacon Cheddar Croissant', 3),
-(2, 'Chocolate Chip Cookie', 3),
-(3, 'Red Velvet Cupcake', 2);
+VALUES (2, 'Chocolate Chip Cookie', (SELECT location_ID FROM Stores WHERE location_name='Cedar Street')),
+(3, 'Red Velvet Cupcake', (SELECT location_ID FROM Stores WHERE location_name='Maple Avenue')),
+(4, 'Bacon Cheddar Croissant', (SELECT location_ID FROM Stores WHERE location_name='Oak Place')),
+(2, 'Chocolate Chip Cookie', (SELECT location_ID FROM Stores WHERE location_name='Oak Place')),
+(3, 'Red Velvet Cupcake', (SELECT location_ID FROM Stores WHERE location_name='Cedar Street'));
 
 CREATE TABLE Ordered_Items (
     ordered_itemID int(11) NOT NULL AUTO_INCREMENT, 
@@ -82,11 +83,11 @@ CREATE TABLE Ordered_Items (
 );
 
 INSERT INTO Ordered_Items (order_ID, item_ID)
-VALUES (1, 1),
-(1, 5),
-(2, 3),
-(2, 4),
-(3, 2);
+VALUES ((SELECT order_ID FROM ORDERS WHERE (SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com') AND pickup = '2026-06-28')), (SELECT item_ID FROM Items WHERE location_ID = 2)),
+((SELECT order_ID FROM Orders WHERE (SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com') AND pickup = '2026-06-28'), (SELECT item_ID FROM Items WHERE location_ID = 1)),
+((SELECT order_ID FROM Orders WHERE (SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com') AND pickup = '2026-07-11'), (SELECT item_ID FROM Items WHERE location_ID = 3)),
+((SELECT order_ID FROM Orders WHERE (SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com') AND pickup = '2026-07-11')), (SELECT item_ID FROM Items WHERE location_ID = 3)),
+((SELECT order_ID FROM Orders WHERE (SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com') AND pickup = '2026-05-30')), (SELECT item_ID FROM Items WHERE location_ID = 2));
 
 CREATE TABLE Customer_Stores (
     customer_StoreID int(11) NOT NULL AUTO_INCREMENT,
@@ -99,8 +100,8 @@ CREATE TABLE Customer_Stores (
 );
 
 INSERT INTO Customer_Stores (customer_ID, location_ID)
-VALUES (1, 3),
-(2, 1),
-(3, 2),
-(2, 3),
-(1, 2);
+VALUES ((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Oak Place')),
+((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Maple Avenue')),
+((SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Cedar Street')),
+((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Oak Place')),
+((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Cedar Street'));

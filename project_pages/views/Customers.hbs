@@ -1,0 +1,126 @@
+<h1>Customers</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each Customers.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    {{!--
+        <tr>
+            {{#each Stores.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+        --}}
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, fname, lname, homeworld and age }}
+                 </button>
+             {{#each Customers}}
+        <tr>
+            <td>{{this.customer_ID}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.email}}</td>
+           
+           
+
+            {{! DELETE form }}
+            <form id='delete_customer_form'>
+                <input type='hidden' name='delete_customer_id' value='{{this.customer_ID}}' />
+                <input type='hidden' name='delete_customer_name' value='{{this.first_name}} {{this.last_name}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+              </td>
+            </form>
+        </tr>
+        {{/each}}
+        {{!--
+
+        {{! For each row, print the id, fname, lname, homeworld and age }}
+                 </button>
+             {{#each Stores}}
+        <tr>
+            
+            <td>{{this.location_name}}</td>
+            <td>{{this.location_ID}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_customer_form'>
+                <input type='hidden' name='delete_customer_name' value='{{this.location_name}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+              </td>
+            </form>
+        </tr>
+        {{/each}}
+        --}}
+        
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Customer</h2>
+<form class='cuForm' id='create_customer_form'>
+    <label for='create_customer_fname'>First Name: </label>
+    <input type='text' name='create_customer_fname' id='create_customer_fname' required />
+
+    <label for='create_customer_lname'>Last Name: </label>
+    <input type='text' name='create_customer_lname' id='create_customer_lname' />
+ {{!--
+    <label for='create_customer_homeworld'>Store: </label>
+    <select name='create_customer_homeworld' id='create_customer_homeworld'>
+        <option value='NULL' selected>Select a store location</option>
+        <option value='NULL'>&lt; None &gt;</option>
+        {{#each Stores}}
+        <option value='{{this.customer_ID}}' required>{{this.location_name}}</option>
+        {{/each}}
+    </select>
+    --}}
+
+    <label for='create_customer_age'>Email:</label>
+    <input type='text' name='create_customer_email' id='create_customer_email' />
+
+    <input type='submit' /> 
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Customer</h2>
+<form class='cuForm' id='update_customer_form'>
+    <label for='update_customer_id'>customer to Update: </label>
+    <select name='update_customer_id' id='update_customer_id' required>
+        <option value='' disabled selected>Select a Customer</option>
+        {{#each Customers}}
+        <option value='{{this.customer_ID}}' required>
+            {{this.customer_ID}}
+            
+            {{this.first_name}}
+            {{this.last_name}}
+        </option>
+        {{/each}}
+    </select>
+    
+    <label for='update_customer_email'>First Name:</label>
+    <input type='text' name='create_customer_first_name' id='create_customer_first_name' />
+
+    <label for='update_customer_email'>Last Name:</label>
+    <input type='text' name='create_customer_last_name' id='create_customer_last_name' />
+
+    <label for='update_customer_age'>Email: </label>
+    <input type='text' name='create_customer_email' id='create_customer_email' />
+
+    <input type='submit' />
+</form>

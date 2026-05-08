@@ -304,10 +304,11 @@
     "write-file-atomic": "^2.4.3",
     "xdg-basedir": "^3.0.0"
   },
- "scripts": {
+  "scripts": {
     "development": "npx nodemon app.js",
     "production": "npx forever start app.js",
     "stop_production": "npx forever stop app.js"
-},  "author": "",
+  },
+  "author": "",
   "license": "ISC"
 }

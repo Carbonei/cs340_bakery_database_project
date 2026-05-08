@@ -1,6 +1,9 @@
 // ########################################
 // ########## SETUP
 
+//Citation: based on Web Exploration Canvas Module
+
+
 // Express
 const express = require('express');
 const app = express();

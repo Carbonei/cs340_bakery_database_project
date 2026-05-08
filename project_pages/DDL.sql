@@ -1,6 +1,7 @@
 SET FOREIGN_KEY_CHECKS = 0;
 SET AUTOCOMMIT = 0;
 
+--clear tables in database if exists
 DROP TABLE IF EXISTS Ordered_Items;
 DROP TABLE IF EXISTS Customer_Stores;
 DROP TABLE IF EXISTS Customers;
@@ -8,6 +9,7 @@ DROP TABLE IF EXISTS Stores;
 DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS Items;
 
+--Create Customers Table
 CREATE TABLE Customers (
     customer_ID int(11) NOT NULL AUTO_INCREMENT, 
     first_name varchar(50) NOT NULL, 
@@ -18,11 +20,13 @@ CREATE TABLE Customers (
     PRIMARY KEY (customer_ID)
 );
 
+--Insert Sample Data into Customers
 INSERT INTO Customers (first_name, last_name, email)
 VALUES ('Taylor', 'Murray', 'murrayt@hello.com'),
 ('Jeremy', 'Grant', 'grantj@hello.com'),
 ('Kate', 'Whitaker', 'whitakate@hello.com');
 
+--Create Stores Table
 CREATE TABLE Stores (
     location_ID int(11) NOT NULL AUTO_INCREMENT, 
     location_name varchar(50) NOT NULL, 
@@ -32,11 +36,13 @@ CREATE TABLE Stores (
     PRIMARY KEY (location_ID)
 );
 
+--Insert Sample Data into Stores
 INSERT INTO Stores (location_name, total_transaction_count)
 VALUES ('Maple Avenue', 200),
 ('Cedar Street', 250),
 ('Oak Place', 300);
 
+--Create Orders Data
 CREATE TABLE Orders (
     order_ID int(11) NOT NULL AUTO_INCREMENT, 
     customer_ID int(11) NOT NULL,
@@ -55,11 +61,13 @@ CREATE TABLE Orders (
     ON DELETE CASCADE
 );
 
+--Insert Sample Data into Orders
 INSERT INTO Orders (customer_ID, order_cost, item_count, pickup, location_ID)
 VALUES ((SELECT customer_ID FROM Customers WHERE first_name='Kate' AND last_name = 'Whitaker'), 5, 2, '2026-06-28', (SELECT location_ID FROM Stores WHERE location_name='Cedar Street')),
 ((SELECT customer_ID FROM Customers WHERE first_name='Taylor' AND last_name = 'Murray'), 6, 2, '2026-07-11', (SELECT location_ID FROM Stores WHERE location_name='Oak Place')),
 ((SELECT customer_ID FROM Customers WHERE first_name='Jeremy' AND last_name = 'Grant'), 3, 1, '2026-05-30', (SELECT location_ID FROM Stores WHERE location_name='Maple Avenue'));
 
+--Create Items Table
 CREATE TABLE Items (
     item_ID int(11) NOT NULL AUTO_INCREMENT, 
     item_cost decimal(10, 2) NOT NULL,
@@ -73,6 +81,7 @@ CREATE TABLE Items (
 );
 
 
+--Insert Sample Data into Items
 INSERT INTO Items (item_cost, item_name, location_ID)
 VALUES (2, 'Chocolate Chip Cookie', (SELECT location_ID FROM Stores WHERE location_name='Cedar Street')),
 (3, 'Red Velvet Cupcake', (SELECT location_ID FROM Stores WHERE location_name='Maple Avenue')),
@@ -80,6 +89,7 @@ VALUES (2, 'Chocolate Chip Cookie', (SELECT location_ID FROM Stores WHERE locati
 (2, 'Chocolate Chip Cookie', (SELECT location_ID FROM Stores WHERE location_name='Oak Place')),
 (3, 'Red Velvet Cupcake', (SELECT location_ID FROM Stores WHERE location_name='Cedar Street'));
 
+--Create Insection Table Ordered_Items
 CREATE TABLE Ordered_Items (
     ordered_itemID int(11) NOT NULL AUTO_INCREMENT, 
     order_ID int(11) NOT NULL, 
@@ -94,6 +104,7 @@ CREATE TABLE Ordered_Items (
     ON DELETE CASCADE
 );
 
+--Insert Foreign Keys using SELECT statments
 INSERT INTO Ordered_Items (order_ID, item_ID)
 VALUES 
 ((SELECT order_ID FROM Orders WHERE customer_ID = 
@@ -112,6 +123,7 @@ VALUES
         (SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com') AND pickup = '2026-05-30'), 
         (SELECT item_ID FROM Items WHERE item_name = "Red Velvet Cupcake" AND location_ID = 1));
 
+--Create intersection table Customer_Stores
 CREATE TABLE Customer_Stores (
     customer_storeID int(11) NOT NULL AUTO_INCREMENT,
     customer_ID int(11) NOT NULL,
@@ -126,6 +138,7 @@ CREATE TABLE Customer_Stores (
     ON DELETE CASCADE
 );
 
+--Insert Foreign Keys using SELECT statments
 INSERT INTO Customer_Stores (customer_ID, location_ID)
 VALUES ((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Oak Place')),
 ((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Maple Avenue')),

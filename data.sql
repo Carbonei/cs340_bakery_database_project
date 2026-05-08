@@ -46,8 +46,13 @@ CREATE TABLE Orders (
     location_ID int(11) NOT NULL,
     UNIQUE KEY (order_ID), 
     PRIMARY KEY (order_ID),
-    FOREIGN KEY (customer_ID) REFERENCES Customers(customer_ID),
+    FOREIGN KEY (customer_ID) REFERENCES Customers(customer_ID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    
     FOREIGN KEY (location_ID) REFERENCES Stores(location_ID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 INSERT INTO Orders (customer_ID, order_cost, item_count, pickup, location_ID)
@@ -63,6 +68,8 @@ CREATE TABLE Items (
     UNIQUE KEY (item_ID),
     PRIMARY KEY (item_ID),
     FOREIGN KEY (location_ID) REFERENCES Stores(location_ID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 
@@ -79,8 +86,12 @@ CREATE TABLE Ordered_Items (
     item_ID int(11) NOT NULL, 
     UNIQUE KEY (ordered_itemID),
     PRIMARY KEY (ordered_itemID),
-    FOREIGN KEY (order_ID) REFERENCES Orders(order_ID),
+    FOREIGN KEY (order_ID) REFERENCES Orders(order_ID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
     FOREIGN KEY (item_ID) REFERENCES Items(item_ID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 INSERT INTO Ordered_Items (order_ID, item_ID)
@@ -107,8 +118,12 @@ CREATE TABLE Customer_Stores (
     location_ID int(11) NOT NULL,
     UNIQUE KEY (customer_storeID),
     PRIMARY KEY (customer_storeID),
-    FOREIGN KEY (customer_ID) REFERENCES Customers(customer_ID),
+    FOREIGN KEY (customer_ID) REFERENCES Customers(customer_ID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
     FOREIGN KEY (location_ID) REFERENCES Stores(location_ID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 INSERT INTO Customer_Stores (customer_ID, location_ID)

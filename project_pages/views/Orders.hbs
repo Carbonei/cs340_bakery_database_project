@@ -1,0 +1,121 @@
+<h1>Orders</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each Orders.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    {{!--
+        <tr>
+            {{#each Stores.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+        --}}
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, fname, lname, homeworld and age }}
+                 </button>
+             {{#each Orders}}
+        <tr>
+            <td>{{this.order_ID}}</td>
+            <td>{{this.order_cost}}</td>
+            <td>{{this.item_count}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.location_name}}</td>
+           
+           
+
+            {{! DELETE form }}
+            <form id='delete_order_form'>
+                <input type='hidden' name='delete_order_id' value='{{this.customer_ID}}' />
+                <input type='hidden' name='delete_order_name' value='{{this.first_name}} {{this.last_name}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+              </td>
+            </form>
+        </tr>
+        {{/each}}
+        
+        
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create an Order</h2>
+<form class='cuForm' id='create_order_form'>
+    <label for='create_order_fname'>Order Cost </label>
+    <input type='text' name='create_order_cost' id='create_order_fname' required />
+
+    <label for='create_order_lname'>Item Count </label>
+    <input type='text' name='create_order_count' id='create_order_lname' />
+
+    <label for='create_order_age'>Customer Name:</label>
+    <select name='update_customer_id' id='update_customer_id' required>
+        <option value='' disabled selected>Select a Customer</option>
+        {{#each Orders}}
+        <option value='{{this.customer_ID}}' required>
+            {{this.customer_ID}}
+            
+            {{this.first_name}}
+            {{this.last_name}}
+        </option>
+        {{/each}}
+    </select>
+    <label for='create_order_location'>Location Name: </label>
+    <select name='create_order_location' id='create_order_location'>
+        <option value='NULL' disabled selected>Select a Location</option>
+        <option value='NULL'>&lt; None &gt;</option>
+        {{#each locations}}
+        <option value='{{this.location_ID}}' required>
+            {{this.location_name}}
+        </option>
+        {{/each}}
+    </select>
+    <input type='submit' /> 
+</form>
+
+{{! UPDATE form }}
+<h2>Update an Order</h2>
+<form class='cuForm' id='update_order_form'>
+    <label for='update_order_id'>Order to Update: </label>
+    <select name='update_order_id' id='update_order_id' required>
+        <option value='' disabled selected>Select an Order to Update</option>
+        {{#each Orders}}
+        <option value='{{this.order_ID}}' required>
+            {{this.order_ID}}
+        </option>
+        {{/each}}
+    </select>
+    
+    <label for='update_order_email'>Order Cost:</label>
+    <input type='text' name='update_order_cost' id='update_order_first_name' />
+
+    <label for='update_order_email'>Item count:</label>
+    <input type='text' name='update_order_last_name' id='update_order_last_name' />
+
+    <label for='update_order_age'>Location Name: </label>
+    <select name='update_order_location' id='update_order_location'>
+        <option value='NULL' disabled selected>Select a Location</option>
+        <option value='NULL'>&lt; None &gt;</option>
+        {{#each locations}}
+        <option value='{{this.location_ID}}' required>
+            {{this.location_name}}
+        </option>
+        {{/each}}
+    </select>
+    <input type='submit' />
+</form>

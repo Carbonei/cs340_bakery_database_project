@@ -65,6 +65,7 @@ CREATE TABLE Items (
     FOREIGN KEY (location_ID) REFERENCES Stores(location_ID)
 );
 
+
 INSERT INTO Items (item_cost, item_name, location_ID)
 VALUES (2, 'Chocolate Chip Cookie', (SELECT location_ID FROM Stores WHERE location_name='Cedar Street')),
 (3, 'Red Velvet Cupcake', (SELECT location_ID FROM Stores WHERE location_name='Maple Avenue')),
@@ -83,17 +84,28 @@ CREATE TABLE Ordered_Items (
 );
 
 INSERT INTO Ordered_Items (order_ID, item_ID)
-VALUES ((SELECT order_ID FROM ORDERS WHERE (SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com') AND pickup = '2026-06-28')), (SELECT item_ID FROM Items WHERE location_ID = 2)),
-((SELECT order_ID FROM Orders WHERE (SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com') AND pickup = '2026-06-28'), (SELECT item_ID FROM Items WHERE location_ID = 1)),
-((SELECT order_ID FROM Orders WHERE (SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com') AND pickup = '2026-07-11'), (SELECT item_ID FROM Items WHERE location_ID = 3)),
-((SELECT order_ID FROM Orders WHERE (SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com') AND pickup = '2026-07-11')), (SELECT item_ID FROM Items WHERE location_ID = 3)),
-((SELECT order_ID FROM Orders WHERE (SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com') AND pickup = '2026-05-30')), (SELECT item_ID FROM Items WHERE location_ID = 2));
+VALUES 
+((SELECT order_ID FROM Orders WHERE customer_ID = 
+        (SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com') AND pickup = '2026-06-28'), 
+        (SELECT item_ID FROM Items WHERE item_name = "Chocolate Chip Cookie" AND location_ID = 2)),
+((SELECT order_ID FROM Orders WHERE customer_ID = 
+        (SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com') AND pickup = '2026-06-28'), 
+        (SELECT item_ID FROM Items WHERE item_name = "Red Velvet Cupcake" AND location_ID = 2)),
+((SELECT order_ID FROM Orders WHERE customer_ID = 
+        (SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com') AND pickup = '2026-07-11'),
+        (SELECT item_ID FROM Items WHERE item_name = "Bacon Cheddar Croissant" AND location_ID = 3)),
+((SELECT order_ID FROM Orders WHERE customer_ID = 
+        (SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com') AND pickup = '2026-07-11'), 
+        (SELECT item_ID FROM Items WHERE item_name = "Chocolate Chip Cookie" AND location_ID = 3)),
+((SELECT order_ID FROM Orders WHERE customer_ID = 
+        (SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com') AND pickup = '2026-05-30'), 
+        (SELECT item_ID FROM Items WHERE item_name = "Red Velvet Cupcake" AND location_ID = 1));
 
 CREATE TABLE Customer_Stores (
-    customer_StoreID int(11) NOT NULL AUTO_INCREMENT,
+    customer_storeID int(11) NOT NULL AUTO_INCREMENT,
     customer_ID int(11) NOT NULL,
     location_ID int(11) NOT NULL,
-    UNIQUE KEY (customer_StoreID),
+    UNIQUE KEY (customer_storeID),
     PRIMARY KEY (customer_storeID),
     FOREIGN KEY (customer_ID) REFERENCES Customers(customer_ID),
     FOREIGN KEY (location_ID) REFERENCES Stores(location_ID)

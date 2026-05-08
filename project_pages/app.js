@@ -32,23 +32,26 @@ app.get('/', async function (req, res) {
     }
 });
 
-app.get('/bsg-people', async function (req, res) {
+app.get('/Customers', async function (req, res) {
     try {
         // Create and execute our queries
         // In query1, we use a JOIN clause to display the names of the homeworlds
+       /*
         const query1 = `SELECT Customers.customer_ID, Customers.first_name, Customers.last_name, Customers.email, \
             Stores.location_name AS 'Stores', Stores.location_ID FROM Customers \
 
-            LEFT JOIN Customer_store ON Customers.customer_ID = Customer_store.customer_ID
-            LEFT JOIN Stores ON Customer_store.Stores_location_ID = Stores.location_ID;`;
+            LEFT JOIN Customer_Stores ON Customers.customer_ID = Customer_Stores.customer_ID
+            LEFT JOIN Stores ON Customer_Stores.location_ID = Stores.location_ID;`;
+     */
+        const query1 = `SELECT Customers.customer_ID, Customers.first_name, Customers.last_name, Customers.email FROM Customers;`;
             
-        const query2 = 'SELECT * FROM Stores;';
+        //const query2 = 'SELECT * FROM Stores;';
         const [Customers] = await db.query(query1);
-        const [Stores] = await db.query(query2);
+        //const [Stores] = await db.query(query2);
 
-        // Render the bsg-people.hbs file, and also send the renderer
+        // Render the Customers.hbs file, and also send the renderer
         //  an object that contains our bsg_people and bsg_homeworld information
-        res.render('bsg-people', { Customers: Customers, Stores: Stores });
+        res.render('Customers', { Customers: Customers});//, Stores: Stores 
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser

@@ -100,7 +100,7 @@ app.get('/Stores', async function (req, res) {
         const [Stores] = await db.query(query1); // Store the results
         
         // Send the results to the browser
-        res.render('Stores', { Customers: Customers});
+        res.render('Stores', { Stores: Stores});
     } catch (error) {
         console.error("Error executing queries:", error);
 
@@ -109,9 +109,10 @@ app.get('/Stores', async function (req, res) {
     }
 });
         
-/*app.get('/Items', async function (req, res) {
+app.get('/Items', async function (req, res) {
     try {
-        const query1 = `SELECT Items.item_ID, Items.item_cost, Items.item_name,
+        const query1 = `SELECT Items.item_ID, Items.item_cost, Items.item_name, Stores.location_name, \
+            Stores.location_name FROM Items \
 
             LEFT JOIN Items ON Items.location_ID = Stores.location_ID;`;
             
@@ -131,7 +132,7 @@ app.get('/Stores', async function (req, res) {
                     'An error occurred while executing the database queries.'
                 );
             }
-});*/
+});
 
 // ########################################
 // ########## LISTENER

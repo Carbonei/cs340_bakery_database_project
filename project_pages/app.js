@@ -55,7 +55,7 @@ app.get('/Customers', async function (req, res) {
 
 app.get('/Orders', async function (req, res) {
     try {
-        const query1 = `SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Customers.first_name, Customers.last_name, \
+        const query1 = `SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Customers.first_name, Customers.last_name, Orders.pickup, \
             Stores.location_name FROM Customers \
 
             LEFT JOIN Orders ON Customers.customer_ID = Orders.customer_ID

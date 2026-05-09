@@ -16,7 +16,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, cost, count, first name, last name, and location }}
+        {{! For each row, print the id, cost, count, first name, last name, pickup date, and location }}
                  </button>
              {{#each Orders}}
         <tr>
@@ -25,6 +25,7 @@
             <td>{{this.item_count}}</td>
             <td>{{this.first_name}}</td>
             <td>{{this.last_name}}</td>
+            <td>{{this.pickup}}</td>
             <td>{{this.location_name}}</td>
            
            
@@ -49,7 +50,7 @@
 <h2>Create an Order</h2>
 <form class='cuForm' id='create_order_form'>
     <label for='create_order_fname'>Order Cost </label>
-    <input type='text' name='create_order_cost' id='create_order_fname' required />
+    <input type='text' name='create_order_cost' id='create_order_cost' required />
 
     <label for='create_order_lname'>Item Count </label>
     <input type='text' name='create_order_count' id='create_order_lname' />
@@ -66,6 +67,10 @@
         </option>
         {{/each}}
     </select>
+
+    <label for='create_order_pickup'>Pickup Date: </label>
+    <input type='text' name='create_order_pickup' id='create_order_pickup' />
+
     <label for='create_order_location'>Location Name: </label>
     <select name='create_order_location' id='create_order_location'>
         <option value='NULL' disabled selected>Select a Location</option>
@@ -97,6 +102,9 @@
 
     <label for='update_order_email'>Item count:</label>
     <input type='text' name='update_order_last_name' id='update_order_last_name' />
+
+    <label for='create_order_pickup'>Pickup Date: </label>
+    <input type='text' name='update_order_pickup' id='crud_order_pickup' />
 
     <label for='update_order_age'>Location Name: </label>
     <select name='update_order_location' id='update_order_location'>

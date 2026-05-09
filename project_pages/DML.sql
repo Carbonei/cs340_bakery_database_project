@@ -1,4 +1,4 @@
--- Citation: queries are inspired by sample_data_manipultion.sql provided in Web Exploration module (link will be provided once Canvas access is restored)
+-- Citation: queries are inspired by sample_data_manipultaion.sql provided in Web Exploration module (link will be provided once Canvas access is restored)
 
 --Customers Queries
 
@@ -25,8 +25,8 @@ INSERT INTO Stores (location_name, total_transaction_count) VALUES (:location_na
 --Update existing store
 UPDATE Stores SET location_name = :location_nameInput, total_transaction_count = :total_transaction_countInput WHERE location_ID= :location_ID_from_drop_down_menu
 
---Delete store from database including all attributes associated with them
-DELETE FROM Stores WHERE Location_ID = :Location_ID_selected_from_Stores_page
+--Deletes a Store from database including all information associated with it
+DELETE FROM Stores WHERE Location_ID = :location_ID_selected_from_Stores_page
 
 --Orders Queries
 
@@ -39,7 +39,7 @@ SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Customers.first_na
 --Select used to display location names in dropdown
 SELECT Stores.location_name FROM Stores;
 
---Insert into Orders using form on /Customers page
+--Insert into Orders using form on /Orders page
 INSERT INTO Orders (order_cost, item_cost, customer_ID, location_ID) VALUES (:order_costInput, :item_costInput, :pickupInput, 
                     :(SELECT Customer_ID FROM Customers WHERE Customers.first_name = :first_name_from_dropdown_menu AND Customers.lastname = :last_name_from_dropdown_menu), 
                     :(SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
@@ -48,7 +48,7 @@ INSERT INTO Orders (order_cost, item_cost, customer_ID, location_ID) VALUES (:or
 UPDATE Orders SET order_cost = :order_costInput, item_count = :item_countInput, :pickup = pickupInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu) 
     WHERE order_ID= :order_ID_from_drop_down_menu
 
---Delete Customer from database including all information associated with them
+--Delete Order from database including all information associated with them
 DELETE FROM Orders WHERE order_ID = :order_ID_selected_from_Orders_page
 
 --Select info used to display information on the Stores
@@ -59,9 +59,12 @@ SELECT Items.item_ID, Items.item_cost, Items.item_name,
 --Used to display the location names in dropdown
 SELECT Stores.location_name FROM Stores;
 
---Insert into Items in the following order on /Stores page
+--Insert into Items in the following order on /Items page
 INSERT INTO Items (item_cost, item_name, location_ID) VALUES (:item_costInput, :item_nameInput, 
                     :(SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
 
 --Update existing item
 UPDATE Items SET item_cost = :item_costInput, item_name = :item_nameInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu)
+
+--Deletes an Item from database including all information associated with it
+DELETE FROM Items WHERE item_ID = :item_ID_selected_from_Items_page

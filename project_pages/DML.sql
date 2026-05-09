@@ -28,7 +28,7 @@ UPDATE Stores SET location_name = :location_nameInput, total_transaction_count =
 --Delete store from database including all attributes associated with them
 DELETE FROM Stores WHERE Location_ID = :Location_ID_selected_from_Stores_page
 
---Orders Quries
+--Orders Queries
 
 --Select used to display information on the Orders, the Customer who placed the order, and the location it was purchased from.
 SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Customers.first_name, Customers.last_name, 
@@ -40,12 +40,12 @@ SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Customers.first_na
 SELECT Stores.location_name FROM Stores;
 
 --Insert into Orders using form on /Customers page
-INSERT INTO Orders (order_cost, item_cost, customer_ID, location_ID) VALUES (:order_costInput, :item_costInput, 
+INSERT INTO Orders (order_cost, item_cost, customer_ID, location_ID) VALUES (:order_costInput, :item_costInput, :pickupInput, 
                     :(SELECT Customer_ID FROM Customers WHERE Customers.first_name = :first_name_from_dropdown_menu AND Customers.lastname = :last_name_from_dropdown_menu), 
                     :(SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
 
 --Update Existing Order  
-UPDATE Orders SET order_cost = :order_costInput, item_count = :item_countInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu) 
+UPDATE Orders SET order_cost = :order_costInput, item_count = :item_countInput, :pickup = pickupInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu) 
     WHERE order_ID= :order_ID_from_drop_down_menu
 
 --Delete Customer from database including all information associated with them

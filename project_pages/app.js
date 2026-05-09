@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-const PORT = 1268;
+const PORT = 1269;
 
 // Database
 const db = require('./database/db-connector');
@@ -55,7 +55,7 @@ app.get('/Customers', async function (req, res) {
 
 app.get('/Orders', async function (req, res) {
     try {
-        const query1 = `SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Customers.first_name, Customers.last_name, Orders.pickup, \
+        const query1 = `SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Orders.pickup, Customers.first_name, Customers.last_name, \
             Stores.location_name FROM Customers \
 
             LEFT JOIN Orders ON Customers.customer_ID = Orders.customer_ID

@@ -96,10 +96,8 @@ app.get('/Stores', async function (req, res) {
         
 app.get('/Items', async function (req, res) {
     try {
-        const query1 = `SELECT Items.item_ID, Items.item_cost, Items.item_name, Stores.location_name, \
-            Stores.location_name FROM Items \
-
-            LEFT JOIN Items ON Items.location_ID = Stores.location_ID;`;
+        const query1 = `SELECT Items.item_ID, Items.item_cost, Items.item_name, Stores.location_name FROM Items
+            LEFT JOIN Stores ON Items.location_ID = Stores.location_ID;`;
             
         const [Items] = await db.query(query1);
         const query2 = 'SELECT Stores.location_name FROM Stores;';

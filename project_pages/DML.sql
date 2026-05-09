@@ -14,6 +14,20 @@ UPDATE Customers SET first_name = :first_nameInput, last_name= :last_nameInput, 
 --Delete Customer from database including all information associated with them
 DELETE FROM Customers WHERE Customer_ID = :Customer_ID_selected_from_Customers_page
 
+--Stores Queries
+
+--Select info used to display information on the Stores
+SELECT Stores.location_ID, Stores.location_name, Stores.total_transaction_count FROM Stores;
+
+--Insert into Stores in the following order on /Stores page
+INSERT INTO Stores (location_name, total_transaction_count) VALUES (:location_nameInput, :total_transaction_countInput);
+
+--Update existing store
+UPDATE Stores SET location_name = :location_nameInput, total_transaction_count = :total_transaction_countInput WHERE location_ID= :location_ID_from_drop_down_menu
+
+--Delete store from database including all attributes associated with them
+DELETE FROM Stores WHERE Location_ID = :Location_ID_selected_from_Stores_page
+
 --Orders Quries
 
 --Select used to display information on the Orders, the Customer who placed the order, and the location it was purchased from.
@@ -37,4 +51,17 @@ UPDATE Orders SET order_cost = :order_costInput, item_count = :item_countInput, 
 --Delete Customer from database including all information associated with them
 DELETE FROM Orders WHERE order_ID = :order_ID_selected_from_Orders_page
 
+--Select info used to display information on the Stores
+SELECT Items.item_ID, Items.item_cost, Items.item_name, 
+        Stores.location_name FROM Items
+        LEFT JOIN Stores on Items.location_ID = Stores.location_ID;
 
+--Used to display the location names in dropdown
+SELECT Stores.location_name FROM Stores;
+
+--Insert into Items in the following order on /Stores page
+INSERT INTO Items (item_cost, item_name, location_ID) VALUES (:item_costInput, :item_nameInput, 
+                    :(SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
+
+--Update existing item
+UPDATE Items SET item_cost = :item_costInput, item_name = :item_nameInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu)

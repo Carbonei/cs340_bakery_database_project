@@ -40,12 +40,12 @@ SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Customers.first_na
 SELECT Stores.location_name FROM Stores;
 
 --Insert into Orders using form on /Customers page
-INSERT INTO Orders (order_cost, item_cost, customer_ID, location_ID) VALUES (:order_costInput, :item_costInput, 
+INSERT INTO Orders (order_cost, item_cost, customer_ID, location_ID) VALUES (:order_costInput, :item_costInput, :pickInput, 
                     :(SELECT Customer_ID FROM Customers WHERE Customers.first_name = :first_name_from_dropdown_menu AND Customers.lastname = :last_name_from_dropdown_menu), 
                     :(SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
 
 --Update Existing Order  
-UPDATE Orders SET order_cost = :order_costInput, item_count = :item_countInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu) 
+UPDATE Orders SET order_cost = :order_costInput, item_count = :item_countInput, :pickup = pickupInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu) 
     WHERE order_ID= :order_ID_from_drop_down_menu
 
 --Delete Customer from database including all information associated with them

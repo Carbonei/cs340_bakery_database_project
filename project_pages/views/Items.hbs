@@ -55,7 +55,7 @@
 {{! CREATE form }}
 <h2>Create an Item</h2>
 <form class='cuForm' id='create_item_form'>
-    <label for='create_item_cost'>Item Cost </label>
+    <label for='create_item_cost'>Item Cost: </label>
     <input type='text' name='create_item_cost' id='create_item_cost' required />
 
     <label for='create_item_name'>Item Name: </label>
@@ -79,7 +79,7 @@
 <form class='cuForm' id='update_item_form'>
     <label for='update_item_id'>Item to Update: </label>
     <select name='update_item_id' id='update_item_id' required>
-        <option value='' disabled selected>Select an Item to Update</option>
+        <option value='' disabled selected>Select an Item</option>
         {{#each Items}}
         <option value='{{this.item_ID}}' required>
             {{this.item_ID}}

@@ -68,16 +68,3 @@ UPDATE Items SET item_cost = :item_costInput, item_name = :item_nameInput, locat
 
 --Deletes an Item from database including all information associated with it
 DELETE FROM Items WHERE item_ID = :item_ID_selected_from_Items_page
-
-SELECT Customer_Stores.customer_storeID, Customer_Stores.customer_ID, Customer_Stores.locationID, 
-        LEFT JOIN Customers on Customer_Stores.customer_ID = Customers.customer_ID
-        LEFT JOIN Stores on Stores.location_ID = Stores.location_ID;
-
---Insert into Customers in the following order on /Items page
-INSERT INTO Customer_Stores (customer_ID, location_ID) VALUES (:customer_idInput, :location_idInput);
-
---Update existing item
-UPDATE Customer_Stores SET customer_storeID = :customer_store_idInput, customer_ID = (SELECT customer_ID FROM Customers WHERE Customers.customer_id = :customer_id_from_dropdown_menu), store_ID = :store_idInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_id = :location_id_from_dropdown_menu)
-
---Deletes an Item from database including all information associated with it
-DELETE FROM Customer_Stores WHERE customer_storeID = :customer_storeID_selected_from_Customer_Stores_page

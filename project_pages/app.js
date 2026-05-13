@@ -117,25 +117,6 @@ app.get('/Items', async function (req, res) {
             }
 });
 
-app.get('/Customer_Stores', async function (req, res) {
-    try {
-        const query1 = `SELECT Customer_Stores.customer_storeID, Customer_Stores.customer_ID, Customer_Stores.location_ID FROM Customer_Stores
-            LEFT JOIN Customers ON Customer_Stores.customer_ID = Customers.customer_ID
-            LEFT JOIN Stores ON Customer_Stores.location_ID = Stores.location_ID;`;
-        const [Customer_Stores] = await db.query(query1);
-
-        // Render the bsg-people.hbs file, and also send the renderer
-        //  an object that contains our bsg_people and bsg_homeworld information
-        res.render('Customer_Stores', { Customer_Stores: Customer_Stores});
-            } catch (error) {
-                console.error('Error executing queries:', error);
-                // Send a generic error message to the browser
-                res.status(500).send(
-                    'An error occurred while executing the database queries.'
-                );
-            }
-});
-
 // ########################################
 // ########## LISTENER
 

@@ -140,8 +140,9 @@ CREATE TABLE Customer_Stores (
 
 --Insert Foreign Keys using SELECT statments
 INSERT INTO Customer_Stores (customer_ID, location_ID)
-VALUES ((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Oak Place')),
-((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Maple Avenue')),
-((SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Cedar Street')),
-((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Oak Place')),
-((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name='Cedar Street'));
+VALUES 
+((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name="Oak Place")),
+((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name="Maple Avenue")),
+((SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com'), (SELECT location_ID FROM Stores WHERE location_name="Cedar Street")),
+((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name="Oak Place")),
+((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name="Cedar Street"));

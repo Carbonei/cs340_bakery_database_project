@@ -1,0 +1,110 @@
+<h1>Ordered Items</h1>
+{{! Citation: Adapted from Web Exploration Module (link when canvas is accessable) }}
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each Ordered_Items.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        {{! For each row, print the ID, first name, last name, and email }}
+                 </button>
+             {{#each Ordered_Items}}
+        <tr>
+            <td>{{this.ordered_itemID}}</td>
+            <td>{{this.order_ID}}</td>
+            <td>{{this.item_name}}</td>
+            <td>{{this.item_cost}}</td>
+            <td>{{this.order_cost}}</td>
+            
+
+            {{! DELETE form }}
+            <form id='delete_ordered_items_form'>
+                <input type='hidden' name='delete_ordered_itemID' value='{{this.ordered_itemID}}' />
+                <input type='hidden' name='delete_order_ID' value='{{this.order_ID}}' />
+                <input type='hidden' name='delete_item_name' value='{{this.item_name}}' />
+                <input type='hidden' name='delete_item_name' value='{{this.item_name}}' />
+                <input type='hidden' name='delete_order_cost' value='{{this.order_cost}}' />
+
+                <td>
+                    <button type='submit'>
+                        Delete
+              </td>
+            </form>
+        </tr>
+        {{/each}}
+        
+        
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Add/Create an Ordered Item on an Order</h2>
+<form class='cuForm' id='create_ordered_items_form'>
+    
+    <label for='create_ordered_items_orderID'>Order ID: </label>
+    <select name='create_ordered_items_orderID' id='create_ordered_items_orderID' required>
+        <option value='' disabled selected>Select an Order</option>
+        {{#each Ordered_Items}}
+        <option value='{{this.order_ID}}' required>
+            {{this.order_ID}}
+        </option>
+        {{/each}}
+    </select>
+    <label for='create_ordered_items_name'>Item ID: </label>
+    <select name='create_ordered_items_name' id='create_ordered_items_name'>
+        <option value='NULL' disabled selected>Select an Item ID</option>
+        {{#each item}} 
+        <option value='{{this.item_id}}' required>
+            {{this.item_id}}
+        </option>
+        {{/each}}
+    </select>
+
+    <input type='submit' /> 
+</form>
+
+{{! UPDATE form }}
+<h2>Update an Ordered Item</h2>
+<form class='cuForm' id='update_customer_form'>
+    <label for='update_ordered_items_orderID'>Ordered Item ID: </label>
+    <select name='update_ordered_items_order_itemID' id='update_ordered_items_ID' required>
+        <option value='' disabled selected>Select an Ordered Item</option>
+        {{#each Ordered_Items}}
+        <option value='{{this.ordered_itemID}}' required>
+            {{this.ordered_itemID}}
+        </option>
+        {{/each}}
+    </select>
+    <label for='update_ordered_items_id'>Updated Order ID: </label>
+    <select name='udate_ordered_items_orderID' id='create_ordered_items_orderID' required>
+        <option value='' disabled selected>Select an Order</option>
+        {{#each Ordered_Items}}
+        <option value='{{this.order_ID}}' required>
+            {{this.order_ID}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_ordered_items_customerID'> Updated Item ID: </label>
+    <select name='update_ordered_items_id' id='create_ordered_items_id'>
+        <option value='NULL' disabled selected>Select an Item ID</option>
+        {{#each item}} 
+        <option value='{{this.item_id}}' required>
+            {{this.item_id}}
+        </option>
+        {{/each}}
+    </select>
+    <input type='submit' /> 
+    
+</form>

@@ -82,3 +82,18 @@ UPDATE Customer_Stores SET customer_ID = (SELECT customer_ID FROM Customers WHER
     WHERE customer_storeID = :customer_storeID_from_drop_down_menu
 
 DELETE FROM Customer_Stores WHERE customer_storeID = :customer_storeID_selected_from_Items_page;
+
+-- Ordered_Items
+SELECT Ordered_Items.ordered_itemID, Orders.order_ID, Items.item_name, Items.item_cost, Orders.order_cost
+        FROM Orders
+        LEFT JOIN 
+            Ordered_Items ON Orders.order_ID = Ordered_Items.order_ID
+        LEFT JOIN 
+            Items ON Ordered_Items.item_ID = Items.item_ID;
+
+INSERT INTO Ordered_Items (ordered_itemID, item_ID) VALUES (:order_ID_from_drop_down_menu, :item_ID_from_drop_down_menu);
+
+DELETE FROM Ordered_Items WHERE ordered_itemID = :ordered_itemID_selected_from_Ordered_Items_page;
+
+UPDATE Ordered_Items SET order_ID = :order_ID_from_drop_down_menu, item_ID = :item_ID_from_drop_down_menu
+    WHERE ordered_itemID = :ordered_itemID_from_drop_down_menu

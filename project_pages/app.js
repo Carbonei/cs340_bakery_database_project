@@ -139,6 +139,36 @@ app.get('/Customer_Stores', async function (req, res) {
             }
 });
 
+app.get('/Ordered_Items', async function (req, res) {
+    try {
+        const query1 = `SELECT Ordered_Items.ordered_itemID, Orders.order_ID, Items.item_name, Items.item_cost, Orders.order_cost
+        FROM Orders
+        LEFT JOIN 
+            Ordered_Items ON Orders.order_ID = Ordered_Items.order_ID
+        LEFT JOIN 
+            Items ON Ordered_Items.item_ID = Items.item_ID;`;
+            
+       
+        const [Ordered_Items] = await db.query(query1);
+        const query2 = 'SELECT Items.item_id FROM Items;';
+       
+        const [item] = await db.query(query2);
+        //console.log("Ordered")
+        //console.log(Ordered_Items)
+        //console.log("item")
+        //console.log(item)
+        res.render('Ordered_Items', { Ordered_Items: Ordered_Items, item: item});
+            } catch (error) {
+                console.error('Error executing queries:', error);
+                // Send a generic error message to the browser
+                res.status(500).send(
+                    'An error occurred while executing the database queries.'
+                );
+            }
+});
+
+
+
 
 // ########################################
 // ########## LISTENER

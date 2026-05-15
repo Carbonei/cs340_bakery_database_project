@@ -31,7 +31,7 @@ DELETE FROM Stores WHERE Location_ID = :location_ID_selected_from_Stores_page
 --Orders Queries
 
 --Select used to display information on the Orders, the Customer who placed the order, and the location it was purchased from.
-SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Customers.first_name, Customers.last_name, 
+SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Orders.pickup AS pickup_date, Customers.first_name, Customers.last_name, 
             Stores.location_name FROM Customers 
             LEFT JOIN Orders ON Customers.customer_ID = Orders.customer_ID
             LEFT JOIN Stores ON Orders.location_ID = Stores.location_ID;

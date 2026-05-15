@@ -12,20 +12,10 @@
             {{/each}}
             <th></th>
         </tr>
-    {{!--
-        <tr>
-            {{#each Stores.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th></th>
-        </tr>
-        --}}
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! For each row, print the ID, cost, name, and location name }}
                  </button>
              {{#each Items}}
         <tr>
@@ -83,6 +73,8 @@
         {{#each Items}}
         <option value='{{this.item_ID}}' required>
             {{this.item_ID}}
+
+            {{this.item_name}}
         </option>
         {{/each}}
     </select>

@@ -97,10 +97,10 @@ CREATE TABLE Ordered_Items (
     PRIMARY KEY (ordered_itemID),
     FOREIGN KEY (order_ID) REFERENCES Orders(order_ID)
     ON UPDATE CASCADE
-    ON DELETE CASCADE,
+    ON DELETE RESTRICT,
     FOREIGN KEY (item_ID) REFERENCES Items(item_ID)
     ON UPDATE CASCADE
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
 );
 
 --Insert Foreign Keys using SELECT statments
@@ -131,17 +131,17 @@ CREATE TABLE Customer_Stores (
     PRIMARY KEY (customer_storeID),
     FOREIGN KEY (customer_ID) REFERENCES Customers(customer_ID)
     ON UPDATE CASCADE
-    ON DELETE CASCADE,
+    ON DELETE RESTRICT,
     FOREIGN KEY (location_ID) REFERENCES Stores(location_ID)
     ON UPDATE CASCADE
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
 );
 
 --Insert Foreign Keys using SELECT statments
 INSERT INTO Customer_Stores (customer_ID, location_ID)
 VALUES 
-((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name="Oak Place")),
-((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name="Maple Avenue")),
-((SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com'), (SELECT location_ID FROM Stores WHERE location_name="Cedar Street")),
-((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name="Oak Place")),
-((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name="Cedar Street"));
+((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name = 'Oak Place')),
+((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name = 'Maple Avenue')),
+((SELECT customer_ID FROM Customers WHERE email = 'whitakate@hello.com'), (SELECT location_ID FROM Stores WHERE location_name = 'Cedar Street')),
+((SELECT customer_ID FROM Customers WHERE email = 'grantj@hello.com'), (SELECT location_ID FROM Stores WHERE location_name = 'Oak Place')),
+((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name = 'Cedar Street'));

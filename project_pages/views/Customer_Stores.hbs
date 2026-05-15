@@ -17,19 +17,26 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the ID, first name, last name, and email }}
+        {{! For each row, print the ID, customer ID, first name, last name, location ID, and location name }}
                  </button>
              {{#each Customer_Stores}}
         <tr>
             <td>{{this.customer_storeID}}</td>
             <td>{{this.customer_ID}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
             <td>{{this.location_ID}}</td>
+            <td>{{this.location_name}}</td>
+
 
             {{! DELETE form }}
             <form id='delete_customer_store_form'>
                 <input type='hidden' name='delete_customer_store_id' value='{{this.customer_storeID}}' />
                 <input type='hidden' name='delete_customer_store_customerID' value='{{this.customer_ID}}' />
+                <input type='hidden' name='delete_customer_store_customer_fname' value='{{this.first_name}}' />
+                <input type='hidden' name='delete_customer_store_customer_lname' value='{{this.last_name}}' />
                 <input type='hidden' name='delete_customer_store_locationID' value='{{this.location_ID}}' />
+                <input type='hidden' name='delete_customer_store_location_name' value='{{this.location_name}}' />
 
                 <td>
                     <button type='submit'>

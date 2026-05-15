@@ -91,9 +91,12 @@ SELECT Ordered_Items.ordered_itemID, Orders.order_ID, Items.item_name, Items.ite
         LEFT JOIN 
             Items ON Ordered_Items.item_ID = Items.item_ID;
 
+--Insert into Ordered Items with a new ordered Item
 INSERT INTO Ordered_Items (ordered_itemID, item_ID) VALUES (:order_ID_from_drop_down_menu, :item_ID_from_drop_down_menu);
 
+-- Delete an ordered item
 DELETE FROM Ordered_Items WHERE ordered_itemID = :ordered_itemID_selected_from_Ordered_Items_page;
 
+--Update an Ordered Item
 UPDATE Ordered_Items SET order_ID = :order_ID_from_drop_down_menu, item_ID = :item_ID_from_drop_down_menu
     WHERE ordered_itemID = :ordered_itemID_from_drop_down_menu

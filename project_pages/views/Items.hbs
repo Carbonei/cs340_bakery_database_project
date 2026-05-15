@@ -52,9 +52,8 @@
     <input type='text' name='create_item_name' id='create_item_name' required />
 
     <label for='create_item_location'>Item Location: </label>
-    <select name='create_item_location' id='create_item_location'>
+    <select name='create_item_location' id='create_item_location' required>
         <option value='NULL' disabled selected>Select a Location</option>
-        <option value='NULL'>&lt; None &gt;</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>
             {{this.location_name}}
@@ -86,9 +85,8 @@
     <input type='text' name='update_item_name' id='update_item_name' />
 
     <label for='update_item_location'>Item Location: </label>
-    <select name='update_item_location' id='update_item_location'>
+    <select name='update_item_location' id='update_item_location' required>
         <option value='NULL' disabled selected>Select a Location</option>
-        <option value='NULL'>&lt; None &gt;</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>
             {{this.location_name}}

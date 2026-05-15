@@ -73,9 +73,8 @@
     <input type='text' name='create_order_pickup' id='create_order_pickup' />
 
     <label for='create_order_location'>Location Name: </label>
-    <select name='create_order_location' id='create_order_location'>
+    <select name='create_order_location' id='create_order_location' required>
         <option value='NULL' disabled selected>Select a Location</option>
-        <option value='NULL'>&lt; None &gt;</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>
             {{this.location_name}}
@@ -110,7 +109,6 @@
     <label for='update_order_age'>Location Name: </label>
     <select name='update_order_location' id='update_order_location'>
         <option value='NULL' disabled selected>Select a Location</option>
-        <option value='NULL'>&lt; None &gt;</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>
             {{this.location_name}}

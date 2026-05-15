@@ -51,7 +51,7 @@
 </table>
 
 {{! CREATE form }}
-<h2>Create a Customer_Store</h2>
+<h2>Create a Customer Store</h2>
 <form class='cuForm' id='create_customer_store_form'>
     <label for='create_customer_store_customerID'>Customer ID: </label>
     <select name='create_customer_store_customerID' id='create_customer_store_customerID' required>
@@ -75,11 +75,11 @@
 </form>
 
 {{! UPDATE form }}
-<h2>Update a Customer</h2>
+<h2>Update a Customer Store</h2>
 <form class='cuForm' id='update_customer_form'>
-    <label for='update_customer_store_id'>Customer_Store to Update: </label>
+    <label for='update_customer_store_id'>Customer Store to Update: </label>
     <select name='update_customer_store_id' id='update_customer_store_id' required>
-        <option value='' disabled selected>Select a Customer_Store</option>
+        <option value='' disabled selected>Select a Customer Store</option>
         {{#each Customer_Stores}}
         <option value='{{this.customer_storeID}}' required>
             {{this.customer_storeID}}
@@ -87,9 +87,9 @@
         {{/each}}
     </select>
 
-    <label for='update_customer_store_customerID'>Customer_Store Customer to Update: </label>
+    <label for='update_customer_store_customerID'>Customer Store Customer to Update: </label>
     <select name='update_customer_store_customerID' id='update_customer_store_customerID' required>
-        <option value='' disabled selected>Select a Customer_Store Customer</option>
+        <option value='' disabled selected>Select a Customer Store Customer</option>
         {{#each customers}}
         <option value='{{this.customer_ID}}' required>
             {{this.customer_ID}}
@@ -97,9 +97,9 @@
         {{/each}}
     </select>
     
-    <label for='update_customer_store_locationID'>Customer_Store Location to Update: </label>
+    <label for='update_customer_store_locationID'>Customer Store Location to Update: </label>
     <select name='update_customer_store_locationID' id='update_customer_store_locationID' required>
-        <option value='' disabled selected>Select a Customer_Store Location</option>
+        <option value='' disabled selected>Select a Customer Store Location</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>
             {{this.location_ID}}

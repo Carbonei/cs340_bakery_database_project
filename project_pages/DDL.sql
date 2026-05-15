@@ -1,5 +1,4 @@
 SET FOREIGN_KEY_CHECKS = 0;
-SET AUTOCOMMIT = 0;
 
 --clear tables in database if exists
 DROP TABLE IF EXISTS Ordered_Items;

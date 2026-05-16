@@ -53,7 +53,7 @@ DELETE FROM Orders WHERE order_ID = :order_ID_selected_from_Orders_page
 
 --Items Queries
 
---Select info used to display information on the Stores
+--Select info used to display information on the Items
 SELECT Items.item_ID, Items.item_cost, Items.item_name, 
         Stores.location_name FROM Items
         LEFT JOIN Stores on Items.location_ID = Stores.location_ID;
@@ -94,7 +94,7 @@ UPDATE Customer_Stores SET customer_ID = (SELECT customer_ID FROM Customers WHER
     WHERE customer_storeID = :customer_storeID_from_drop_down_menu
 
 --Deletes a Customer_Store
-DELETE FROM Customer_Stores WHERE customer_storeID = :customer_storeID_selected_from_Items_page;
+DELETE FROM Customer_Stores WHERE customer_storeID = :customer_storeID_selected_from_Customer_Stores_page;
 
 -- Ordered_Items
 

@@ -39,13 +39,15 @@
     </tbody>
 </table>
 
+<p class="required-alert">All labels for input/selector fields that are required are marked with '*'.</p>
+
 {{! CREATE form }}
 <h2>Create a Store</h2>
 <form class='cuForm' id='create_store_form'>
-    <label for='create_location_name'>Location Name: </label>
+    <label for='create_location_name'>Location Name*: </label>
     <input type='text' name='create_location_name' id='create_location_name' required />
 
-    <label for='create_transaction_count'>Total Transaction Count: </label>
+    <label for='create_transaction_count'>Total Transaction Count*: </label>
     <input type='text' name='create_transaction_count' id='create_transaction_count' />
 
     <input type='submit' /> 
@@ -54,7 +56,7 @@
 {{! UPDATE form }}
 <h2>Update a Person</h2>
 <form class='cuForm' id='update_store_form'>
-    <label for='update_location_id'>Location to Update: </label>
+    <label for='update_location_id'>Location to Update*: </label>
     <select name='update_location_id' id='update_location_id' required>
         <option value='' disabled selected>Select a Location</option>
         {{#each Stores}}

@@ -47,16 +47,18 @@
     </tbody>
 </table>
 
+<p class="required-alert">All labels for input/selector fields that are required are marked with '*'.</p>
+
 {{! CREATE form }}
 <h2>Create an Order</h2>
 <form class='cuForm' id='create_order_form'>
-    <label for='create_order_fname'>Order Cost </label>
+    <label for='create_order_fname'>Order Cost*: </label>
     <input type='text' name='create_order_cost' id='create_order_cost' required />
 
-    <label for='create_order_lname'>Item Count </label>
+    <label for='create_order_lname'>Item Count*: </label>
     <input type='text' name='create_order_count' id='create_order_lname' />
 
-    <label for='create_order_age'>Customer Name:</label>
+    <label for='create_order_age'>Customer Name*: </label>
     <select name='create_customer_id' id='create_customer_id' required>
         <option value='' disabled selected>Select a Customer</option>
         {{#each Orders}}
@@ -69,10 +71,10 @@
         {{/each}}
     </select>
 
-    <label for='create_order_pickup'>Pickup Date: </label>
+    <label for='create_order_pickup'>Pickup Date*(enter in 'YYYY-MM-DD' format): </label>
     <input type='text' name='create_order_pickup' id='create_order_pickup' />
 
-    <label for='create_order_location'>Location Name: </label>
+    <label for='create_order_location'>Location Name*: </label>
     <select name='create_order_location' id='create_order_location' required>
         <option value='NULL' disabled selected>Select a Location</option>
         {{#each locations}}
@@ -87,7 +89,7 @@
 {{! UPDATE form }}
 <h2>Update an Order</h2>
 <form class='cuForm' id='update_order_form'>
-    <label for='update_order_id'>Order to Update: </label>
+    <label for='update_order_id'>Order to Update*: </label>
     <select name='update_order_id' id='update_order_id' required>
         <option value='' disabled selected>Select an Order</option>
         {{#each Orders}}

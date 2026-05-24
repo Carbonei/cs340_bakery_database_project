@@ -48,20 +48,22 @@
     </tbody>
 </table>
 
+<p class="required-alert">All labels for input/selector fields that are required are marked with '*'.</p>
+
 {{! CREATE form }}
 <h2>Add/Create an Ordered Item on an Order</h2>
 <form class='cuForm' id='create_ordered_items_form'>
     
-    <label for='create_ordered_items_orderID'>Order ID: </label>
+    <label for='create_ordered_items_orderID'>Order ID*: </label>
     <select name='create_ordered_items_orderID' id='create_ordered_items_orderID' required>
-        <option value='' disabled selected>Select an Order</option>
+        <option value='' disabled selected>Select an Order ID</option>
         {{#each Ordered_Items}}
         <option value='{{this.order_ID}}' required>
             {{this.order_ID}}
         </option>
         {{/each}}
     </select>
-    <label for='create_ordered_items_name'>Item ID: </label>
+    <label for='create_ordered_items_name'>Item ID*: </label>
     <select name='create_ordered_items_name' id='create_ordered_items_name'>
         <option value='NULL' disabled selected>Select an Item ID</option>
         {{#each item}} 
@@ -77,9 +79,9 @@
 {{! UPDATE form }}
 <h2>Update an Ordered Item</h2>
 <form class='cuForm' id='update_customer_form'>
-    <label for='update_ordered_items_orderID'>Ordered Item ID: </label>
+    <label for='update_ordered_items_orderID'>Ordered Item ID*: </label>
     <select name='update_ordered_items_order_itemID' id='update_ordered_items_ID' required>
-        <option value='' disabled selected>Select an Ordered Item</option>
+        <option value='' disabled selected>Select an Ordered Item ID</option>
         {{#each Ordered_Items}}
         <option value='{{this.ordered_itemID}}' required>
             {{this.ordered_itemID}}
@@ -88,7 +90,7 @@
     </select>
     <label for='update_ordered_items_id'>Updated Order ID: </label>
     <select name='udate_ordered_items_orderID' id='create_ordered_items_orderID' required>
-        <option value='' disabled selected>Select an Order</option>
+        <option value='' disabled selected>Select an Order ID</option>
         {{#each Ordered_Items}}
         <option value='{{this.order_ID}}' required>
             {{this.order_ID}}

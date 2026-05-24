@@ -44,17 +44,19 @@
     </tbody>
 </table>
 
+<p class="required-alert">All labels for input/selector fields that are required are marked with '*'.</p>
+
 {{! CREATE form }}
 <h2>Create a Customer</h2>
 <form class='cuForm' id='create_customer_form'>
-    <label for='create_customer_fname'>First Name: </label>
+    <label for='create_customer_fname'>First Name*: </label>
     <input type='text' name='create_customer_fname' id='create_customer_fname' required />
 
-    <label for='create_customer_lname'>Last Name: </label>
+    <label for='create_customer_lname'>Last Name*: </label>
     <input type='text' name='create_customer_lname' id='create_customer_lname' />
  
 
-    <label for='create_customer_age'>Email:</label>
+    <label for='create_customer_age'>Email*:</label>
     <input type='text' name='create_customer_email' id='create_customer_email' />
 
     <input type='submit' /> 
@@ -63,7 +65,7 @@
 {{! UPDATE form }}
 <h2>Update a Customer</h2>
 <form class='cuForm' id='update_customer_form'>
-    <label for='update_customer_id'>customer to Update: </label>
+    <label for='update_customer_id'>Customer to Update*: </label>
     <select name='update_customer_id' id='update_customer_id' required>
         <option value='' disabled selected>Select a Customer</option>
         {{#each Customers}}

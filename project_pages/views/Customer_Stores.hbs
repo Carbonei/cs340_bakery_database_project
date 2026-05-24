@@ -50,10 +50,12 @@
     </tbody>
 </table>
 
+<p class="required-alert">All labels for input/selector fields that are required are marked with '*'.</p>
+
 {{! CREATE form }}
 <h2>Create a Customer Store</h2>
 <form class='cuForm' id='create_customer_store_form'>
-    <label for='create_customer_store_customerID'>Customer ID: </label>
+    <label for='create_customer_store_customerID'>Customer ID*: </label>
     <select name='create_customer_store_customerID' id='create_customer_store_customerID' required>
         <option value='' disabled selected>Select a Customer</option>
         {{#each customers}}
@@ -62,7 +64,7 @@
         </option>
         {{/each}}
     </select>
-    <label for='create_customer_store_locationID'>Store Location ID: </label>
+    <label for='create_customer_store_locationID'>Store Location ID*: </label>
     <select name='create_customer_store_locationID' id='create_customer_store_locationID'>
         <option value='NULL' disabled selected>Select a Location</option>
         {{#each locations}}
@@ -77,9 +79,9 @@
 {{! UPDATE form }}
 <h2>Update a Customer Store</h2>
 <form class='cuForm' id='update_customer_form'>
-    <label for='update_customer_store_id'>Customer Store to Update: </label>
+    <label for='update_customer_store_id'>Customer Store ID*: </label>
     <select name='update_customer_store_id' id='update_customer_store_id' required>
-        <option value='' disabled selected>Select a Customer Store</option>
+        <option value='' disabled selected>Select a Customer Store ID</option>
         {{#each Customer_Stores}}
         <option value='{{this.customer_storeID}}' required>
             {{this.customer_storeID}}
@@ -87,9 +89,9 @@
         {{/each}}
     </select>
 
-    <label for='update_customer_store_customerID'>Customer Store Customer to Update: </label>
+    <label for='update_customer_store_customerID'>Updated Customer ID: </label>
     <select name='update_customer_store_customerID' id='update_customer_store_customerID' required>
-        <option value='' disabled selected>Select a Customer Store Customer</option>
+        <option value='' disabled selected>Select a Customer ID</option>
         {{#each customers}}
         <option value='{{this.customer_ID}}' required>
             {{this.customer_ID}}
@@ -97,9 +99,9 @@
         {{/each}}
     </select>
     
-    <label for='update_customer_store_locationID'>Customer Store Location to Update: </label>
+    <label for='update_customer_store_locationID'>Updated Store Location ID: </label>
     <select name='update_customer_store_locationID' id='update_customer_store_locationID' required>
-        <option value='' disabled selected>Select a Customer Store Location</option>
+        <option value='' disabled selected>Select a Location ID</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>
             {{this.location_ID}}

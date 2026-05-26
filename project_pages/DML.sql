@@ -9,10 +9,10 @@ SELECT Customers.customer_ID, Customers.first_name, Customers.last_name, Custome
 INSERT INTO Customers (first_name, last_name, email) VALUES (:first_nameInput, :last_nameInput, :emailInput);
 
 --Update Existing Customer  
-UPDATE Customers SET first_name = :first_nameInput, last_name= :last_nameInput, email = :emailInput WHERE customer_ID= :customer_ID_from_drop_down_menu
+UPDATE Customers SET first_name = :first_nameInput, last_name= :last_nameInput, email = :emailInput WHERE customer_ID= :customer_ID_from_drop_down_menu;
 
 --Delete Customer from database including all information associated with them
-DELETE FROM Customers WHERE Customer_ID = :Customer_ID_selected_from_Customers_page
+DELETE FROM Customers WHERE Customer_ID = :Customer_ID_selected_from_Customers_page;
 
 --Stores Queries
 
@@ -23,10 +23,10 @@ SELECT Stores.location_ID, Stores.location_name, Stores.total_transaction_count 
 INSERT INTO Stores (location_name, total_transaction_count) VALUES (:location_nameInput, :total_transaction_countInput);
 
 --Update existing store
-UPDATE Stores SET location_name = :location_nameInput, total_transaction_count = :total_transaction_countInput WHERE location_ID= :location_ID_from_drop_down_menu
+UPDATE Stores SET location_name = :location_nameInput, total_transaction_count = :total_transaction_countInput WHERE location_ID= :location_ID_from_drop_down_menu;
 
 --Deletes a Store from database including all information associated with it
-DELETE FROM Stores WHERE Location_ID = :location_ID_selected_from_Stores_page
+DELETE FROM Stores WHERE Location_ID = :location_ID_selected_from_Stores_page;
 
 --Orders Queries
 
@@ -46,10 +46,10 @@ INSERT INTO Orders (order_cost, item_count, customer_ID, location_ID) VALUES (:o
 
 --Update Existing Order  
 UPDATE Orders SET order_cost = :order_costInput, item_count = :item_countInput, pickup = :pickupInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu) 
-    WHERE order_ID= :order_ID_from_drop_down_menu
+    WHERE order_ID= :order_ID_from_drop_down_menu;
 
 --Delete Order from database including all information associated with them
-DELETE FROM Orders WHERE order_ID = :order_ID_selected_from_Orders_page
+DELETE FROM Orders WHERE order_ID = :order_ID_selected_from_Orders_page;
 
 --Items Queries
 
@@ -67,7 +67,7 @@ INSERT INTO Items (item_cost, item_name, location_ID) VALUES (:item_costInput, :
 
 --Update existing Item
 UPDATE Items SET item_cost = :item_costInput, item_name = :item_nameInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu)
-    WHERE item_ID = :item_ID_from_drop_down_menu
+    WHERE item_ID = :item_ID_from_drop_down_menu;
 
 --Deletes an Item from database including all information associated with it
 DELETE FROM Items WHERE item_ID = :item_ID_selected_from_Items_page;
@@ -75,7 +75,7 @@ DELETE FROM Items WHERE item_ID = :item_ID_selected_from_Items_page;
 -- Customer_Stores
 
 --Select info used to display information on Customer_Stores
-SELECT SELECT Customer_Stores.customer_storeID, Customer_Stores.customer_ID, Customers.first_name, Customers.last_name, Customer_Stores.location_ID, Stores.location_name FROM Customer_Stores
+SELECT Customer_Stores.customer_storeID, Customer_Stores.customer_ID, Customers.first_name, Customers.last_name, Customer_Stores.location_ID, Stores.location_name FROM Customer_Stores
     LEFT JOIN Customers on Customer_Stores.customer_ID = Customers.customer_ID
     LEFT JOIN Stores on Customer_Stores.location_ID = Stores.location_ID;
 
@@ -91,7 +91,7 @@ INSERT INTO Customer_Stores (customer_ID, location_ID) VALUES (:(SELECT customer
 
 --Update Existing Customer_Store  
 UPDATE Customer_Stores SET customer_ID = (SELECT customer_ID FROM Customers WHERE Customers.customer_ID = :customerID_from_dropdown_menu), location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_ID = :locationID_from_dropdown_menu) 
-    WHERE customer_storeID = :customer_storeID_from_drop_down_menu
+    WHERE customer_storeID = :customer_storeID_from_drop_down_menu;
 
 --Deletes a Customer_Store
 DELETE FROM Customer_Stores WHERE customer_storeID = :customer_storeID_selected_from_Customer_Stores_page;
@@ -110,11 +110,11 @@ SELECT Ordered_Items.ordered_itemID, Orders.order_ID, Items.item_name, Items.ite
 SELECT Items.item_id FROM Items;
 
 --Insert into Ordered Items with a new ordered Item
-INSERT INTO Ordered_Items (ordered_itemID, item_ID) VALUES (:order_ID_from_drop_down_menu, :item_ID_from_drop_down_menu);
+INSERT INTO Ordered_Items (order_ID, item_ID) VALUES (:order_ID_from_drop_down_menu, :item_ID_from_drop_down_menu);
 
 -- Delete an ordered item
 DELETE FROM Ordered_Items WHERE ordered_itemID = :ordered_itemID_selected_from_Ordered_Items_page;
 
 --Update an Ordered Item
 UPDATE Ordered_Items SET order_ID = :order_ID_from_drop_down_menu, item_ID = :item_ID_from_drop_down_menu
-    WHERE ordered_itemID = :ordered_itemID_from_drop_down_menu
+    WHERE ordered_itemID = :ordered_itemID_from_drop_down_menu;

@@ -1,6 +1,6 @@
 -- Citation: queries are inspired by sample_data_manipultaion.sql provided in Web Exploration module (link will be provided once Canvas access is restored)
 
---Customers Queries
+-- Customers Queries
 
 --Select info used to display information on the Customers
 SELECT Customers.customer_ID, Customers.first_name, Customers.last_name, Customers.email FROM Customers;
@@ -8,13 +8,13 @@ SELECT Customers.customer_ID, Customers.first_name, Customers.last_name, Custome
 --Insert into Customers using form on /Customers page
 INSERT INTO Customers (first_name, last_name, email) VALUES (:first_nameInput, :last_nameInput, :emailInput);
 
---Update Existing Customer  
+-- Update Existing Customer  
 UPDATE Customers SET first_name = :first_nameInput, last_name= :last_nameInput, email = :emailInput WHERE customer_ID= :customer_ID_from_drop_down_menu;
 
 --Delete Customer from database including all information associated with them
 DELETE FROM Customers WHERE Customer_ID = :Customer_ID_selected_from_Customers_page;
 
---Stores Queries
+-- Stores Queries
 
 --Select info used to display information on the Stores
 SELECT Stores.location_ID, Stores.location_name, Stores.total_transaction_count FROM Stores;
@@ -28,7 +28,7 @@ UPDATE Stores SET location_name = :location_nameInput, total_transaction_count =
 --Deletes a Store from database including all information associated with it
 DELETE FROM Stores WHERE Location_ID = :location_ID_selected_from_Stores_page;
 
---Orders Queries
+-- Orders Queries
 
 --Select used to display information on the Orders, the Customer who placed the order, and the location it was purchased from.
 SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Orders.pickup AS pickup_date, Customers.first_name, Customers.last_name, 
@@ -51,7 +51,7 @@ UPDATE Orders SET order_cost = :order_costInput, item_count = :item_countInput, 
 --Delete Order from database including all information associated with them
 DELETE FROM Orders WHERE order_ID = :order_ID_selected_from_Orders_page;
 
---Items Queries
+-- Items Queries
 
 --Select info used to display information on the Items
 SELECT Items.item_ID, Items.item_cost, Items.item_name, 
@@ -72,7 +72,7 @@ UPDATE Items SET item_cost = :item_costInput, item_name = :item_nameInput, locat
 --Deletes an Item from database including all information associated with it
 DELETE FROM Items WHERE item_ID = :item_ID_selected_from_Items_page;
 
--- Customer_Stores
+-- Customer_Stores Queries
 
 --Select info used to display information on Customer_Stores
 SELECT Customer_Stores.customer_storeID, Customer_Stores.customer_ID, Customers.first_name, Customers.last_name, Customer_Stores.location_ID, Stores.location_name FROM Customer_Stores
@@ -96,7 +96,7 @@ UPDATE Customer_Stores SET customer_ID = (SELECT customer_ID FROM Customers WHER
 --Deletes a Customer_Store
 DELETE FROM Customer_Stores WHERE customer_storeID = :customer_storeID_selected_from_Customer_Stores_page;
 
--- Ordered_Items
+-- Ordered_Items Queries
 
 --Select info used to display information on Ordered_Items
 SELECT Ordered_Items.ordered_itemID, Orders.order_ID, Items.item_name, Items.item_cost, Orders.order_cost

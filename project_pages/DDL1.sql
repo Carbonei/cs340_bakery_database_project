@@ -4,10 +4,7 @@
 -- referenced procedure beginning and end syntax and altered it to 
 -- match our existing code
 
-DROP PROCEDURE IF EXISTS sp_load_bakerydb;
-DELIMITER //
-CREATE PROCEDURE sp_load_bakerydb()
-BEGIN
+
     SET FOREIGN_KEY_CHECKS = 0;
 
     -- clear tables in database if exists
@@ -158,7 +155,6 @@ BEGIN
     ((SELECT customer_ID FROM Customers WHERE email = 'murrayt@hello.com'), (SELECT location_ID FROM Stores WHERE location_name = 'Cedar Street'));
 
     SET FOREIGN_KEY_CHECKS=1;
-END //
-DELIMITER ;
+
 
 

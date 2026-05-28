@@ -40,9 +40,9 @@ SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Orders.pickup AS p
 SELECT Stores.location_name FROM Stores;
 
 --Insert into Orders using form on /Orders page
-INSERT INTO Orders (order_cost, item_count, customer_ID, location_ID) VALUES (:order_costInput, :item_countInput, :pickupInput, 
-                    :(SELECT Customer_ID FROM Customers WHERE Customers.first_name = :first_name_from_dropdown_menu AND Customers.last_name = :last_name_from_dropdown_menu), 
-                    :(SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
+INSERT INTO Orders (order_cost, item_count, pickup, customer_ID, location_ID) VALUES (:order_costInput, :item_countInput, :pickupInput, 
+                    (SELECT Customer_ID FROM Customers WHERE Customers.first_name = :first_name_from_dropdown_menu AND Customers.last_name = :last_name_from_dropdown_menu), 
+                    (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
 
 --Update Existing Order  
 UPDATE Orders SET order_cost = :order_costInput, item_count = :item_countInput, pickup = :pickupInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu) 
@@ -63,7 +63,7 @@ SELECT Stores.location_name FROM Stores;
 
 --Insert into Items in the following order on /Items page
 INSERT INTO Items (item_cost, item_name, location_ID) VALUES (:item_costInput, :item_nameInput, 
-                    :(SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
+                    (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
 
 --Update existing Item
 UPDATE Items SET item_cost = :item_costInput, item_name = :item_nameInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu)
@@ -86,8 +86,8 @@ SELECT Customers.customer_ID FROM Customers;
 SELECT Stores.location_ID FROM Stores;
 
 --Inserts a new Customer_Store into Customer_Stores table
-INSERT INTO Customer_Stores (customer_ID, location_ID) VALUES (:(SELECT customer_ID FROM Customers WHERE Customers.customer_ID = :customerID_from_dropdown_menu),  
-                    :(SELECT location_ID FROM Stores WHERE Stores.location_ID = :locationID_from_dropdown_menu));
+INSERT INTO Customer_Stores (customer_ID, location_ID) VALUES ((SELECT customer_ID FROM Customers WHERE Customers.customer_ID = :customerID_from_dropdown_menu),  
+                    (SELECT location_ID FROM Stores WHERE Stores.location_ID = :locationID_from_dropdown_menu));
 
 --Update Existing Customer_Store  
 UPDATE Customer_Stores SET customer_ID = (SELECT customer_ID FROM Customers WHERE Customers.customer_ID = :customerID_from_dropdown_menu), location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_ID = :locationID_from_dropdown_menu) 

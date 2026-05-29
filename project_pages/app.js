@@ -309,7 +309,12 @@ app.post('/Items/reset', async function (req, res) {
     }
 });
 
-
+//-- Citation for the following code:
+//-- Date: 5/26/2026
+// Adapted from "Exploration - Implementing CUD operations in your app" 
+//  example code
+// -- referenced procedure beginning and end syntax and altered it to 
+// -- match our existing code
 
 
 // DELETE ROUTES

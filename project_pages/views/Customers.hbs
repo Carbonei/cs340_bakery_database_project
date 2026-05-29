@@ -29,7 +29,7 @@
            
 
             {{! DELETE form }}
-            <form id='delete_customer_form'>
+            <form id='delete_customer_form' method='POST' action='/Customers/delete'>
                 <input type='hidden' name='delete_customer_id' value='{{this.customer_ID}}' />
                 <input type='hidden' name='delete_customer_name' value='{{this.first_name}} {{this.last_name}}' />
                 <td>
@@ -92,7 +92,7 @@
 
 <h2>Reset Data</h2>
 
-<form id='customer_reset'>
+<form id='customer_reset' method='POST' action='/Customers/reset'>
                 
     <td>
         <button type='submit'>

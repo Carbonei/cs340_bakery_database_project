@@ -168,7 +168,7 @@ app.post('/Orders/reset', async function (req, res) {
     try {
         // Parse frontend form information
         let data = req.body;
-
+       
         const query1 = `CALL sp_load_bakerydb();`;
 
       
@@ -186,6 +186,130 @@ app.post('/Orders/reset', async function (req, res) {
         );
     }
 });
+
+// reset Stores ROUTES
+app.post('/Stores/reset', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+       
+        const query1 = `CALL sp_load_bakerydb();`;
+
+      
+        await db.query(query1);
+
+        console.log(`Reset`);
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Stores');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// reset Customers ROUTES
+app.post('/Customers/reset', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+       
+        const query1 = `CALL sp_load_bakerydb();`;
+
+      
+        await db.query(query1);
+
+        console.log(`Reset`);
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Customers');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+
+// reset Customer_Stores ROUTES
+app.post('/Customer_Stores/reset', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+       
+        const query1 = `CALL sp_load_bakerydb();`;
+
+      
+        await db.query(query1);
+
+        console.log(`Reset`);
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Customer_Stores');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+
+// reset Ordered_Items ROUTES
+app.post('/Ordered_Items/reset', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+       
+        const query1 = `CALL sp_load_bakerydb();`;
+
+      
+        await db.query(query1);
+
+        console.log(`Reset`);
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Ordered_Items');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// reset Items ROUTES
+app.post('/Items/reset', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+       
+        const query1 = `CALL sp_load_bakerydb();`;
+
+      
+        await db.query(query1);
+
+        console.log(`Reset`);
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Items');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+
 
 
 // DELETE ROUTES
@@ -205,6 +329,34 @@ app.post('/Orders/delete', async function (req, res) {
 
         // Redirect the user to the updated webpage data
         res.redirect('/Orders');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+
+
+// DELETE Customers ROUTES
+app.post('/Customers/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+        console.log(data);
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_DeleteCustomer(?);`;
+        await db.query(query1, [data.delete_customer_id]);
+
+        console.log(`DELETE Customer. ID: ${data.delete_customer_id} ` +
+            `Name: ${data.delete_customer_name}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/Customers');
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser

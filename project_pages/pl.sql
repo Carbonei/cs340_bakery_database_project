@@ -76,3 +76,67 @@ BEGIN
 
 END //
 DELIMITER ;
+
+
+
+
+-- #############################
+-- CREATE Customer
+-- #############################
+DROP PROCEDURE IF EXISTS sp_CreateCustomer;
+
+DELIMITER //
+CREATE PROCEDURE sp_CreateCustomer(
+    
+    IN c_first_name VARCHAR(50), 
+    IN c_last_name VARCHAR(50), 
+    IN c_email VARCHAR(50), 
+    
+    OUT c_id INT)
+BEGIN
+    INSERT INTO Customers ( first_name, last_name, email) 
+    VALUES ( c_first_name, c_last_name, c_email);
+
+    -- Store the ID of the last inserted row
+    SELECT LAST_INSERT_ID() into c_id;
+    -- Display the ID of the last inserted person.
+    SELECT LAST_INSERT_ID() AS 'new_id';
+
+    -- Example of how to get the ID of the newly created person:
+        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
+        -- SELECT @new_id AS 'New Person ID';
+END //
+DELIMITER ;
+
+
+
+
+-- #############################
+-- CREATE Order
+-- #############################
+DROP PROCEDURE IF EXISTS sp_CreateOrder;
+
+DELIMITER //
+CREATE PROCEDURE sp_CreateOrder(
+    IN o_customer_ID INT(11), 
+    IN o_order_cost DECIMAL(10, 2), 
+    IN o_item_count INT(11),
+    IN o_pickup DATE,
+    IN o_location_ID INT(11),
+    OUT o_id INT)
+BEGIN
+    INSERT INTO Orders ( customer_ID, order_cost, item_count, pickup, location_ID) 
+    VALUES ( o_customer_ID, o_order_cost, o_item_count, o_pickup, o_location_ID);
+
+    -- Store the ID of the last inserted row
+    SELECT LAST_INSERT_ID() into o_id;
+    -- Display the ID of the last inserted order.
+    SELECT LAST_INSERT_ID() AS 'new_id';
+
+    
+END //
+DELIMITER ;
+
+-- Example of how to get the ID of the newly created person:
+        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
+        -- SELECT @new_id AS 'New Person ID';

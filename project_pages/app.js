@@ -58,7 +58,7 @@ app.get('/Orders', async function (req, res) {
         const query1 = `SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Orders.pickup AS pickup_date, Customers.first_name, Customers.last_name, \
             Stores.location_name FROM Customers \
 
-            LEFT JOIN Orders ON Customers.customer_ID = Orders.customer_ID
+            LEFT JOIN Orders ON Orders.customer_ID = Customers.customer_ID
             LEFT JOIN Stores ON Orders.location_ID = Stores.location_ID;`;
             
        
@@ -370,6 +370,100 @@ app.post('/Customers/delete', async function (req, res) {
         );
     }
 });
+
+
+// Create Order Route
+// CREATE ROUTES
+app.post('/Orders/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        console.log("Customer ID received:", req.body.create_order_customer_ID);
+        console.log("Location ID received:", req.body.create_order_location_ID);
+
+        // Cleanse data - If the homeworld or age aren't numbers, make them NULL.
+
+        //probably doesn't work*********
+        if (isNaN(parseInt(data.create_order_pickup)))
+            data.create_order_pickup = null;
+
+        
+
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateOrder( ?, ?, ?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_order_customer_ID,
+            data.create_order_cost,
+            data.create_order_item_count,
+            data.create_order_pickup,
+            data.create_order_location_ID,
+        ]);
+
+        console.log(`CREATE Order ID: ${rows.new_id} ` +
+            `Name: ${data.create_order_customer_ID} `
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Orders');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+
+
+
+// CREATE Customer ROUTE
+app.post('/Customers/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateCustomer(?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_customer_first_name,
+            data.create_customer_last_name,
+            data.create_customer_email,
+        ]);
+
+        console.log(`CREATE Customer ID: ${rows.new_id} ` +
+            `Name: ${data.create_person_first_name} ${data.create_person_last_name}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Customers');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
 
 
 // ########################################

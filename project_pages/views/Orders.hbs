@@ -60,8 +60,8 @@
 
     <label for='create_order_customer_ID'>Customer Name*: </label>
     <select name='create_order_customer_ID' id='create_order_customer_ID' required>
-        <option value="" disabled selected>Select a Customer</option>
-        {{#each Orders}}
+        <option value='' disabled selected>Select a Customer</option>
+        {{#each customers}}
         <option value='{{this.customer_ID}}' required>
             {{this.customer_ID}}
             
@@ -76,7 +76,7 @@
 
     <label for='create_order_location_ID'>Location Name*: </label>
     <select name='create_order_location_ID' id='create_order_location_ID' required>
-        <option value="" disabled selected>Select a Location</option>
+        <option value='' disabled selected>Select a Location</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>
             {{this.location_ID}}

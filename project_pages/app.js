@@ -63,10 +63,12 @@ app.get('/Orders', async function (req, res) {
             
        
         const [Orders] = await db.query(query1);
-        const query2 = 'SELECT Stores.location_name FROM Stores;';
+        const query2 = 'SELECT Stores.location_ID, Stores.location_name FROM Stores;';
         const [locations] = await db.query(query2);
-        console.log("test");
-        res.render('Orders', { Orders: Orders, locations:locations});
+        const query3 = 'SELECT Customers.first_name, Customers.last_name, Customers.customer_ID FROM Customers;';
+        const [customers] = await db.query(query3);
+        //console.log("test");
+        res.render('Orders', { Orders: Orders, locations:locations, customers:customers});
             } catch (error) {
                 console.error('Error executing queries:', error);
                 // Send a generic error message to the browser

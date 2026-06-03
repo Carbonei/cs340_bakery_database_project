@@ -1,3 +1,7 @@
+-- Citation for the following code:
+-- Copied Adapted from Exploration - Implementing CUD operations in your app
+-- match our existing code
+
 -- #############################
 -- DELETE order
 -- #############################
@@ -140,3 +144,18 @@ DELIMITER ;
 -- Example of how to get the ID of the newly created person:
         -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
         -- SELECT @new_id AS 'New Person ID';
+
+
+
+-- #############################
+-- UPDATE Customer
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateCustomer;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateCustomer(IN c_id INT, IN c_first_name VARCHAR(50), IN c_last_name VARCHAR(50), IN c_email VARCHAR(50))
+
+BEGIN
+    UPDATE Customers SET first_name = c_first_name, last_name = c_last_name, email = c_email WHERE customer_ID = c_id; 
+END //
+DELIMITER ;

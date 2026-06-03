@@ -455,7 +455,38 @@ app.post('/Customers/create', async function (req, res) {
 });
 
 
+//Update Customer Route
+app.post('/Customers/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
 
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = 'CALL sp_UpdateCustomer(?, ?, ?, ?);';
+        const query2 = 'SELECT first_name, last_name, email FROM Customers WHERE customer_ID = ?;';
+        await db.query(query1, [
+            data.update_customer_id,
+            data.update_customer_first_name,
+            data.update_customer_last_name,
+            data.update_customer_email,
+        ]);
+        const [[rows]] = await db.query(query2, [data.update_customer_id]);
+
+        console.log(`UPDATE Customers. ID: ${data.update_customer_id} ` +
+            `Name: ${rows.last_name} ${rows.first_name}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/Customers');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
 
 
 

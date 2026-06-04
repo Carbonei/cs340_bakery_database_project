@@ -89,7 +89,7 @@
 
 {{! UPDATE form }}
 <h2>Update an Order</h2>
-<form class='cuForm' id='update_order_form'>
+<form class='cuForm' id='update_order_form'  method='POST' action='/Orders/update'>
     <label for='update_order_id'>Order to Update*: </label>
     <select name='update_order_id' id='update_order_id' required>
         <option value='' disabled selected>Select an Order</option>
@@ -100,17 +100,17 @@
         {{/each}}
     </select>
     
-    <label for='update_order_email'>Order Cost:</label>
-    <input type='text' name='update_order_cost' id='update_order_first_name' />
+    <label for='update_order_cost'>Order Cost:</label>
+    <input type='text' name='update_order_cost' id='update_order_cost' />
 
-    <label for='update_order_email'>Item count:</label>
-    <input type='text' name='update_order_last_name' id='update_order_last_name' />
+    <label for='update_order_item_count'>Item count:</label>
+    <input type='text' name='update_order_item_count' id='update_order_item_count' />
 
-    <label for='create_order_pickup'>Pickup Date: </label>
-    <input type='text' name='update_order_pickup' id='crud_order_pickup' />
+    <label for='update_order_pickup'>Pickup Date: </label>
+    <input type='text' name='update_order_pickup' id='update_order_pickup' />
 
-    <label for='update_order_age'>Location Name: </label>
-    <select name='update_order_location' id='update_order_location'>
+    <label for='update_order_location_ID'>Location Name: </label>
+    <select name='update_order_location_ID' id='update_order_location_ID'>
         <option value='NULL' disabled selected>Select a Location</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>

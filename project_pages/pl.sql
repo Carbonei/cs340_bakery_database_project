@@ -141,9 +141,20 @@ BEGIN
 END //
 DELIMITER ;
 
--- Example of how to get the ID of the newly created person:
-        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
-        -- SELECT @new_id AS 'New Person ID';
+
+
+-- #############################
+-- UPDATE Order
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateOrder;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateOrder(IN o_id INT, IN o_order_cost DECIMAL(10, 2), IN o_item_count INT, IN o_pickup DATE, IN o_location_ID INT)
+
+BEGIN
+    UPDATE Orders SET order_cost = o_order_cost, item_count = o_item_count, pickup = o_pickup, location_ID = o_location_ID WHERE order_ID = o_id; 
+END //
+DELIMITER ;
 
 
 

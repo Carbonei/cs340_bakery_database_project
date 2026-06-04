@@ -456,6 +456,7 @@ app.post('/Customers/create', async function (req, res) {
     }
 });
 
+//Update Routes
 
 //Update Customer Route
 app.post('/Customers/update', async function (req, res) {
@@ -495,7 +496,43 @@ app.post('/Customers/update', async function (req, res) {
 
 
 
+// UPDATE Order ROUTE
+app.post('/Orders/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
 
+        // Cleanse data - If the homeworld or age aren't numbers, make them NULL.
+        //if (isNaN((data.update_order_pickup)))
+          //  data.update_order_pickup = null;
+       
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = 'CALL sp_UpdateOrder(?, ?, ?, ?, ?);';
+        const query2 = 'SELECT order_ID, order_cost, item_count, pickup, location_ID FROM Orders WHERE order_ID = ?;';
+        await db.query(query1, [
+            data.update_order_id,
+            data.update_order_cost,
+            data.update_order_item_count,
+            data.update_order_pickup,
+            data.update_order_location_ID,
+        ]);
+        const [[rows]] = await db.query(query2, [data.update_order_id]);
+
+        console.log(`UPDATE Order ID: ${data.update_order_id} ` 
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/Orders');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
 
 
 

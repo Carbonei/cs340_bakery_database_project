@@ -591,6 +591,40 @@ app.post('/Orders/update', async function (req, res) {
 });
 
 
+// UPDATE Order ROUTE
+app.post('/Ordered_Items/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
+       
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = 'CALL sp_UpdateOrderedItem(?, ?, ?);';
+        const query2 = 'SELECT  order_ID, item_ID FROM Ordered_Items WHERE ordered_itemID = ?;';
+        await db.query(query1, [
+            data.update_ordered_itemID,
+            data.update_order_id,
+            data.update_item_id,
+
+        ]);
+        const [[rows]] = await db.query(query2, [data.update_order_id]);
+
+        console.log(`UPDATE Ordered Item ID: ${data.update_order_id} ` 
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/Ordered_Items');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+
 
 // ########################################
 // ########## LISTENER

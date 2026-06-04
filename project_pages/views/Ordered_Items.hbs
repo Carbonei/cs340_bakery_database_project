@@ -81,9 +81,9 @@
 
 {{! UPDATE form }}
 <h2>Update an Ordered Item</h2>
-<form class='cuForm' id='update_customer_form'>
-    <label for='update_ordered_items_orderID'>Ordered Item ID*: </label>
-    <select name='update_ordered_items_order_itemID' id='update_ordered_items_ID' required>
+<form class='cuForm' id='update_customer_form' method='POST' action='/Ordered_Items/update' >
+    <label for='update_ordered_itemID'>Ordered Item ID*: </label>
+    <select name='update_ordered_itemID' id='update_ordered_itemID' required>
         <option value='' disabled selected>Select an Ordered Item ID</option>
         {{#each Ordered_Items}}
         <option value='{{this.ordered_itemID}}' required>
@@ -91,8 +91,8 @@
         </option>
         {{/each}}
     </select>
-    <label for='update_ordered_items_id'>Updated Order ID: </label>
-    <select name='update_ordered_items_orderID' id='create_ordered_items_orderID' required>
+    <label for='update_order_id'>Updated Order ID: </label>
+    <select name='update_order_id' id='update_order_id' required>
         <option value='' disabled selected>Select an Order ID</option>
         {{#each Ordered_Items}}
         <option value='{{this.order_ID}}' required>
@@ -101,12 +101,14 @@
         {{/each}}
     </select>
 
-    <label for='update_ordered_items_customerID'> Updated Item ID: </label>
-    <select name='update_ordered_items_id' id='create_ordered_items_id'>
-        <option value='NULL' disabled selected>Select an Item ID</option>
+    <label for='update_item_id'> Updated Item: </label>
+    <select name='update_item_id' id='update_item_id'>
+        <option value='NULL' disabled selected>Select an Item</option>
         {{#each item}} 
         <option value='{{this.item_id}}' required>
-            {{this.item_id}}
+            {{this.item_name}}
+            -
+            {{this.location_name}}
         </option>
         {{/each}}
     </select>

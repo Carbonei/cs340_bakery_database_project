@@ -221,3 +221,17 @@ BEGIN
     UPDATE Customers SET first_name = c_first_name, last_name = c_last_name, email = c_email WHERE customer_ID = c_id; 
 END //
 DELIMITER ;
+
+
+-- #############################
+-- UPDATE Ordered Item
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateOrderedItem;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateOrderedItem(IN oi_id INT, IN oi_order INT, IN oi_item INT)
+
+BEGIN
+    UPDATE Ordered_Items SET order_ID = oi_order, item_ID = oi_item WHERE ordered_itemID = oi_id; 
+END //
+DELIMITER ;

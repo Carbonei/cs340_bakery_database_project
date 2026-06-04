@@ -47,12 +47,12 @@
         
     </tbody>
 </table>
-
+<p>Order cost is manually updated in Orders.</p>
 <p class="required-alert">All labels for input/selector fields that are required are marked with '*'.</p>
 
 {{! CREATE form }}
 <h2>Add/Create an Ordered Item on an Order</h2>
-<form class='cuForm' id='create_ordered_items_form'>
+<form class='cuForm' id='create_ordered_items_form' method='POST' action='/Ordered_Items/create' >
     
     <label for='create_ordered_items_orderID'>Order ID*: </label>
     <select name='create_ordered_items_orderID' id='create_ordered_items_orderID' required>
@@ -63,12 +63,15 @@
         </option>
         {{/each}}
     </select>
-    <label for='create_ordered_items_name'>Item ID*: </label>
-    <select name='create_ordered_items_name' id='create_ordered_items_name'>
-        <option value='NULL' disabled selected>Select an Item ID</option>
-        {{#each item}} 
+    <label for='create_ordered_items_id'>Item*: </label>
+    <select name='create_ordered_items_id' id='create_ordered_items_id'>
+        <option value='NULL' disabled selected>Select an Item</option>
+        {{#each item}}   
         <option value='{{this.item_id}}' required>
-            {{this.item_id}}
+           
+            {{this.item_name}}
+            -
+            {{this.location_name}}
         </option>
         {{/each}}
     </select>

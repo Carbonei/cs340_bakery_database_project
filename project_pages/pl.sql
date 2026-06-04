@@ -169,6 +169,32 @@ DELIMITER ;
 
 
 -- #############################
+-- CREATE Ordered Item
+-- #############################
+DROP PROCEDURE IF EXISTS sp_CreateOrderedItem;
+
+DELIMITER //
+CREATE PROCEDURE sp_CreateOrderedItem(
+    IN oi_order_ID INT, 
+    IN oi_item_ID INT, 
+    OUT oi_id INT)
+BEGIN
+    INSERT INTO Ordered_Items (order_ID, item_ID) 
+    VALUES (oi_order_ID, oi_item_ID);
+
+    -- Store the ID of the last inserted row
+    SELECT LAST_INSERT_ID() into oi_id;
+    -- Display the ID of the last inserted person.
+    SELECT LAST_INSERT_ID() AS 'new_id';
+
+    -- Example of how to get the ID of the newly created person:
+        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
+        -- SELECT @new_id AS 'New Person ID';
+END //
+DELIMITER ;
+
+
+-- #############################
 -- UPDATE Order
 -- #############################
 DROP PROCEDURE IF EXISTS sp_UpdateOrder;

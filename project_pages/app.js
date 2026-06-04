@@ -145,10 +145,12 @@ app.get('/Ordered_Items', async function (req, res) {
             Orders ON Orders.order_ID = Ordered_Items.order_ID
         LEFT JOIN 
             Items ON Ordered_Items.item_ID = Items.item_ID;`;
-            
        
         const [Ordered_Items] = await db.query(query1);
-        const query2 = 'SELECT Items.item_id FROM Items;';
+
+        const query2 = `SELECT Items.item_id, Stores.location_name, Items.item_name FROM Items
+            LEFT JOIN 
+                Stores ON Items.location_ID = Stores.location_ID;`;
        
         const [item] = await db.query(query2);
         //console.log("Ordered")
@@ -399,10 +401,10 @@ app.post('/Ordered_Items/delete', async function (req, res) {
     }
 });
 
-
+// CREATE ROUTES
 
 // Create Order Route
-// CREATE ROUTES
+
 app.post('/Orders/create', async function (req, res) {
     try {
         // Parse frontend form information
@@ -413,7 +415,6 @@ app.post('/Orders/create', async function (req, res) {
 
         // Cleanse data - If the homeworld or age aren't numbers, make them NULL.
 
-        //probably doesn't work*********
         if (isNaN(parseInt(data.create_order_pickup)))
             data.create_order_pickup = null;
 
@@ -483,6 +484,37 @@ app.post('/Customers/create', async function (req, res) {
     }
 });
 
+// CREATE Ordered_Item ROUTE
+app.post('/Ordered_Items/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateOrderedItem(?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_ordered_items_orderID,
+            data.create_ordered_items_id,
+        ]);
+
+        console.log(`CREATE ordered item ID: ${rows.new_id} ` 
+           
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Ordered_Items');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 //Update Routes
 
 //Update Customer Route
@@ -517,9 +549,6 @@ app.post('/Customers/update', async function (req, res) {
         );
     }
 });
-
-
-
 
 
 

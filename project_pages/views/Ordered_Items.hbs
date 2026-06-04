@@ -29,7 +29,7 @@
             
 
             {{! DELETE form }}
-            <form id='delete_ordered_items_form'>
+            <form id='delete_ordered_items_form' method='POST' action='/Ordered_Items/delete'>
                 <input type='hidden' name='delete_ordered_itemID' value='{{this.ordered_itemID}}' />
                 <input type='hidden' name='delete_order_ID' value='{{this.order_ID}}' />
                 <input type='hidden' name='delete_item_name' value='{{this.item_name}}' />

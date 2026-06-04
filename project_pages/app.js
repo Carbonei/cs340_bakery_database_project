@@ -140,9 +140,9 @@ app.get('/Customer_Stores', async function (req, res) {
 app.get('/Ordered_Items', async function (req, res) {
     try {
         const query1 = `SELECT Ordered_Items.ordered_itemID, Orders.order_ID, Items.item_name, Items.item_cost, Orders.order_cost
-        FROM Orders
+        FROM Ordered_Items
         LEFT JOIN 
-            Ordered_Items ON Orders.order_ID = Ordered_Items.order_ID
+            Orders ON Orders.order_ID = Ordered_Items.order_ID
         LEFT JOIN 
             Items ON Ordered_Items.item_ID = Items.item_ID;`;
             
@@ -372,6 +372,33 @@ app.post('/Customers/delete', async function (req, res) {
         );
     }
 });
+
+// DELETE Ordered Item ROUTES
+app.post('/Ordered_Items/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_DeleteOrderedItem(?);`;
+        await db.query(query1, [data.delete_ordered_itemID]);
+
+        console.log(`DELETE Ordered_Items. ID: ${data.delete_ordered_itemID} ` 
+           
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/Ordered_Items');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 
 
 // Create Order Route

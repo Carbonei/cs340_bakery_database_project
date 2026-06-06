@@ -1,4 +1,4 @@
--- Citation for all procs except sp_DeleteStore:
+-- Citation for all procs except sp_DeleteStore and sp_CreateItem:
 -- Copied Adapted from Exploration - Implementing CUD operations in your app
 -- match our existing code
 
@@ -7,9 +7,19 @@
 -- Copied from /OR/ Adapted from /OR/ Based on 
 -- (Explain degree of originality)
 -- Source URL: https://m365.cloud.microsoft/
--- If AI tools were used: AI was used to debug why the console (when deleting from table on website) was 
--- reporting a null location_ID to be deleted. No code was used, but its advice to check naming 
+-- If AI tools were used: AI was used to figure out why the console (when deleting from table on website) was 
+-- reporting a null location_ID to be deleted. No code was copied, but its advice to check naming 
 -- inconsistencies helped me narrow down the root cause.
+-- (Explain the use of tools and include a summary of the prompts submitted to the AI tool)
+
+-- Citation for sp_CreateItem
+-- Date: 06/06/2026
+-- Copied from /OR/ Adapted from /OR/ Based on 
+-- (Explain degree of originality)
+-- Source URL: https://m365.cloud.microsoft/
+-- If AI tools were used: AI was used to figure out why the console (when inserting new record into table on website) 
+-- was reporting that a foreign key constraint failed for location ID. No code was copied, but its advice made
+-- me realize that I was sending just the location name and not the location ID from the database into the handlebars template.
 -- (Explain the use of tools and include a summary of the prompts submitted to the AI tool)
 
 -- #############################
@@ -131,9 +141,9 @@ BEGIN
     -- error handler
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        -- Rolls back the transaction on any error
+        -- Roll back the transaction on any error
         ROLLBACK;
-        -- Displays the custom error message to the caller
+        -- Propogate the custom error message to the caller
         RESIGNAL;
     END;
 
@@ -144,6 +154,7 @@ BEGIN
         -- were affected after executing above DELETE query)
          IF ROW_COUNT() = 0 THEN 
              SET error_message = CONCAT('No matching record found in Stores for location_id ', l_id);
+             -- Trigger custom error, invoke EXIT HANDLER
              SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
          END IF;
          
@@ -165,9 +176,9 @@ BEGIN
     -- error handler
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        -- Rolls back the transaction on any error
+        -- Roll back the transaction on any error
         ROLLBACK;
-        -- Displays the custom error message to the caller
+        -- Propogate the custom error message to the caller
         RESIGNAL;
     END;
 
@@ -178,6 +189,7 @@ BEGIN
         -- were affected after executing above DELETE query)
          IF ROW_COUNT() = 0 THEN 
              SET error_message = CONCAT('No matching record found in Items for item_id ', i_id);
+             -- Trigger custom error, invoke EXIT HANDLER
              SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
          END IF;
          
@@ -201,7 +213,7 @@ BEGIN
     BEGIN
         -- Rolls back the transaction on any error
         ROLLBACK;
-         -- Displays the custom error message to the caller
+        -- Propogate the custom error message to the caller
         RESIGNAL;
     END;
 
@@ -212,6 +224,7 @@ BEGIN
         -- were affected after executing above DELETE query)
          IF ROW_COUNT() = 0 THEN 
              SET error_message = CONCAT('No matching record found in Customer_Stores for customer_storeID ', cs_id);
+             -- Trigger custom error, invoke EXIT HANDLER
              SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
          END IF;
          
@@ -304,6 +317,84 @@ BEGIN
 END //
 DELIMITER ;
 
+-- #############################
+-- CREATE Store
+-- #############################
+DROP PROCEDURE IF EXISTS sp_CreateStore;
+
+DELIMITER //
+CREATE PROCEDURE sp_CreateStore(
+    IN s_location_name VARCHAR(50),
+    IN s_total_transaction_count INT,
+    OUT l_id INT
+    )
+BEGIN
+    INSERT INTO Stores (location_name, total_transaction_count)
+    VALUES (s_location_name, s_total_transaction_count);
+
+    -- Store the ID of the last inserted row
+    SELECT LAST_INSERT_ID() into l_id;
+    -- Display the ID of the last inserted location
+    SELECT LAST_INSERT_ID() AS 'new_location_id';
+
+    -- Example of how to get the ID of the newly created person:
+        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
+        -- SELECT @new_id AS 'New Person ID';
+END //
+DELIMITER ;
+
+-- #############################
+-- CREATE Item
+-- #############################
+DROP PROCEDURE IF EXISTS sp_CreateItem;
+
+DELIMITER //
+CREATE PROCEDURE sp_CreateItem(
+    IN i_item_cost DECIMAL(10, 2),
+    IN i_item_name VARCHAR(50),
+    IN i_location_ID INT,
+    OUT i_id INT
+    )
+BEGIN
+    INSERT INTO Items (item_cost, item_name, location_ID)
+    VALUES (i_item_cost, i_item_name, i_location_ID);
+
+    -- Store the ID of the last inserted row
+    SELECT LAST_INSERT_ID() into i_id;
+    -- Display the ID of the last inserted item
+    SELECT LAST_INSERT_ID() AS 'new_item_id';
+
+    -- Example of how to get the ID of the newly created person:
+        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
+        -- SELECT @new_id AS 'New Person ID';
+END //
+DELIMITER ;
+
+-- #############################
+-- CREATE Customer_Store
+-- #############################
+DROP PROCEDURE IF EXISTS sp_CreateCustomerStore;
+
+DELIMITER //
+CREATE PROCEDURE sp_CreateCustomerStore(
+    IN cs_customer_ID INT,
+    IN cs_location_ID INT,
+    OUT cs_id INT
+    )
+BEGIN
+    INSERT INTO Customer_Stores (customer_ID, location_ID)
+    VALUES (cs_customer_ID, cs_location_ID);
+
+    -- Store the ID of the last inserted row
+    SELECT LAST_INSERT_ID() into cs_id;
+    -- Display the ID of the last inserted item
+    SELECT LAST_INSERT_ID() AS 'new_cs_id';
+
+    -- Example of how to get the ID of the newly created person:
+        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
+        -- SELECT @new_id AS 'New Person ID';
+END //
+DELIMITER ;
 
 -- #############################
 -- UPDATE Order

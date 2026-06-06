@@ -55,22 +55,27 @@
 
 {{! CREATE form }}
 <h2>Create a Customer Store</h2>
-<form class='cuForm' id='create_customer_store_form'>
-    <label for='create_customer_store_customerID'>Customer ID*: </label>
+<form class='cuForm' id='create_customer_store_form' method='POST' action='/Customer_Stores/create'>
+    <label for='create_customer_store_customerID'>Customer*: </label>
     <select name='create_customer_store_customerID' id='create_customer_store_customerID' required>
         <option value='' disabled selected>Select a Customer</option>
         {{#each customers}}
         <option value='{{this.customer_ID}}' required>
             {{this.customer_ID}}
+
+            {{this.first_name}}
+            {{this.last_name}}
         </option>
         {{/each}}
     </select>
-    <label for='create_customer_store_locationID'>Store Location ID*: </label>
+    <label for='create_customer_store_locationID'>Store Location*: </label>
     <select name='create_customer_store_locationID' id='create_customer_store_locationID'>
         <option value='NULL' disabled selected>Select a Location</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>
             {{this.location_ID}}
+
+            {{this.location_name}}
         </option>
         {{/each}}
     </select>
@@ -90,22 +95,27 @@
         {{/each}}
     </select>
 
-    <label for='update_customer_store_customerID'>Updated Customer ID: </label>
+    <label for='update_customer_store_customerID'>Updated Customer: </label>
     <select name='update_customer_store_customerID' id='update_customer_store_customerID' required>
-        <option value='' disabled selected>Select a Customer ID</option>
+        <option value='' disabled selected>Select a Customer</option>
         {{#each customers}}
         <option value='{{this.customer_ID}}' required>
             {{this.customer_ID}}
+
+            {{this.first_name}}
+            {{this.last_name}}
         </option>
         {{/each}}
     </select>
     
-    <label for='update_customer_store_locationID'>Updated Store Location ID: </label>
+    <label for='update_customer_store_locationID'>Updated Store Location: </label>
     <select name='update_customer_store_locationID' id='update_customer_store_locationID' required>
-        <option value='' disabled selected>Select a Location ID</option>
+        <option value='' disabled selected>Select a Location</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>
             {{this.location_ID}}
+
+            {{this.location_name}}
         </option>
         {{/each}}
     </select>

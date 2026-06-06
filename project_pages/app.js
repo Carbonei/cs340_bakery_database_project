@@ -102,7 +102,7 @@ app.get('/Items', async function (req, res) {
             LEFT JOIN Stores ON Items.location_ID = Stores.location_ID;`;
             
         const [Items] = await db.query(query1);
-        const query2 = 'SELECT Stores.location_name FROM Stores;';
+        const query2 = 'SELECT Stores.location_ID, Stores.location_name FROM Stores;';
             
         const [locations] = await db.query(query2);
       
@@ -122,9 +122,9 @@ app.get('/Customer_Stores', async function (req, res) {
             LEFT JOIN Customers ON Customer_Stores.customer_ID = Customers.customer_ID
             LEFT JOIN Stores ON Customer_Stores.location_ID = Stores.location_ID;`;
         const [Customer_Stores] = await db.query(query1);
-        const query2 = 'SELECT Customers.customer_ID FROM Customers;';
+        const query2 = 'SELECT Customers.customer_ID, Customers.first_name, Customers.last_name FROM Customers;';
         const [customers] = await db.query(query2);
-        const query3 = 'SELECT Stores.location_ID FROM Stores;';
+        const query3 = 'SELECT Stores.location_ID, Stores.location_name FROM Stores;';
         const [locations] = await db.query(query3);
 
         res.render('Customer_Stores', { Customer_Stores: Customer_Stores, customers:customers, locations:locations});
@@ -404,13 +404,17 @@ app.post('/Ordered_Items/delete', async function (req, res) {
 // DELETE Stores ROUTES
 app.post('/Stores/delete', async function (req, res) {
     try {
-        // Reads the information as per the template specifications
+        // Parse frontend form information
         let data = req.body;
-        console.log(data.delete_location_id);
        
         const query1 = `CALL sp_DeleteStore(?);`;
         // Sends in the delete_location_id value as the argument for sp_DeleteStore()
         await db.query(query1, [data.delete_location_id]);
+
+        console.log(`DELETE Store. ID: ${data.delete_location_id} ` +
+            `Location name: ${data.delete_location_name} ` +
+            `Total transaction count: ${data.delete_transaction_count}`
+        );
 
         // Redirect the user to the updated webpage
         res.redirect('/Stores');
@@ -426,13 +430,18 @@ app.post('/Stores/delete', async function (req, res) {
 // DELETE Items ROUTES
 app.post('/Items/delete', async function (req, res) {
     try {
-        // Reads the information as per the template specifications
+        // Parse frontend form information
         let data = req.body;
-        console.log(data.delete_item_id);
        
         const query1 = `CALL sp_DeleteItem(?);`;
         // Sends in the delete_item_id value as the argument for sp_DeleteItem()
         await db.query(query1, [data.delete_item_id]);
+
+        console.log(`DELETE Item. ID: ${data.delete_item_id} ` +
+            `Item cost: ${data.delete_item_cost} ` +
+            `Item name: ${data.delete_item_name} ` +
+            `Location name: ${data.delete_location_name}`
+        );
 
         // Redirect the user to the updated webpage
         res.redirect('/Items');
@@ -448,13 +457,19 @@ app.post('/Items/delete', async function (req, res) {
 // DELETE Customer_Stores ROUTES
 app.post('/Customer_Stores/delete', async function (req, res) {
     try {
-        // Reads the information as per the template specifications
+        // Parse frontend form information
         let data = req.body;
-        console.log(data.delete_customer_store_id);
        
         const query1 = `CALL sp_DeleteCustomerStore(?);`;
         // Sends in the delete_customer_store_id value as the argument for sp_DeleteCustomerStore()
         await db.query(query1, [data.delete_customer_store_id]);
+
+        console.log(`DELETE Customer_Store. ID: ${data.delete_customer_store_id} ` +
+            `Customer ID: ${data.delete_customer_store_customerID} ` +
+            `Customer Full Name: ${data.delete_customer_store_customer_fname} ${data.delete_customer_store_customer_lname} ` +
+            `Location ID: ${data.delete_customer_store_locationID} ` +
+            `Location name: ${data.delete_customer_store_location_name}`
+        );
 
         // Redirect the user to the updated webpage
         res.redirect('/Customer_Stores');
@@ -572,6 +587,103 @@ app.post('/Ordered_Items/create', async function (req, res) {
 
         // Redirect the user to the updated webpage
         res.redirect('/Ordered_Items');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// CREATE Store ROUTE
+app.post('/Stores/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateStore(?, ?, @new_location_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_location_name,
+            data.create_transaction_count
+        ]);
+
+        console.log(`CREATE Store. ID: ${rows.new_location_id} ` +
+            `Location name: ${data.create_location_name} ` +
+            `Total transaction count: ${data.create_transaction_count}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Stores');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// CREATE Item ROUTE
+app.post('/Items/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateItem(?, ?, ?, @new_item_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_item_cost,
+            data.create_item_name,
+            data.create_item_location_id
+        ]);
+
+        console.log(`CREATE Item. ID: ${rows.new_item_id} ` +
+            `Item cost: ${data.create_item_cost} ` +
+            `Item name: ${data.create_item_name} ` +
+            `Location ID: ${data.create_item_location_id}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Items');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.post('/Customer_Stores/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateCustomerStore(?, ?, @new_cs_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_customer_store_customerID,
+            data.create_customer_store_locationID
+        ]);
+
+        console.log(`CREATE Customer_Store. ID: ${rows.new_cs_id} ` +
+            `Customer ID: ${data.create_customer_store_customerID} ` +
+            `Location ID: ${data.create_customer_store_locationID}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Customer_Stores');
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser

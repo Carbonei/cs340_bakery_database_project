@@ -44,7 +44,7 @@
 
 {{! CREATE form }}
 <h2>Create a Store</h2>
-<form class='cuForm' id='create_store_form'>
+<form class='cuForm' id='create_store_form' method='POST' action='/Stores/create'>
     <label for='create_location_name'>Location Name*: </label>
     <input type='text' name='create_location_name' id='create_location_name' required />
 
@@ -55,7 +55,7 @@
 </form>
 
 {{! UPDATE form }}
-<h2>Update a Person</h2>
+<h2>Update a Store</h2>
 <form class='cuForm' id='update_store_form'>
     <label for='update_location_id'>Location to Update*: </label>
     <select name='update_location_id' id='update_location_id' required>

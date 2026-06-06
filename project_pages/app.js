@@ -802,7 +802,106 @@ app.post('/Ordered_Items/update', async function (req, res) {
     }
 });
 
+// UPDATE Store ROUTE
+app.post('/Stores/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
 
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = 'CALL sp_UpdateStore(?, ?, ?);';
+        const query2 = 'SELECT location_name, total_transaction_count FROM Stores WHERE location_ID = ?;';
+        await db.query(query1, [
+            data.update_location_id,
+            data.update_location_name,
+            data.update_transaction_count
+        ]);
+        const [[rows]] = await db.query(query2, [data.update_location_id]);
+
+        console.log(`UPDATE Stores. ID: ${data.update_location_id} ` +
+            `Location name: ${rows.location_name} ` +
+            `Total transaction count: ${rows.total_transaction_count}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/Stores');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// UPDATE Item ROUTE
+app.post('/Items/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = 'CALL sp_UpdateItem(?, ?, ?, ?);';
+        const query2 = 'SELECT item_cost, item_name, location_ID FROM Items WHERE item_ID = ?;';
+        await db.query(query1, [
+            data.update_item_id,
+            data.update_item_cost,
+            data.update_item_name,
+            data.update_item_location_id
+        ]);
+        const [[rows]] = await db.query(query2, [data.update_item_id]);
+
+        console.log(`UPDATE Items. ID: ${data.update_item_id} ` +
+            `Item cost: ${rows.item_cost} ` +
+            `Item name: ${rows.item_name} ` +
+            `Location ID: ${rows.location_ID}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/Items');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// UPDATE Customer_Store ROUTE
+app.post('/Customer_Stores/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = 'CALL sp_UpdateCustomerStore(?, ?, ?);';
+        const query2 = 'SELECT customer_ID, location_ID FROM Customer_Stores WHERE customer_StoreID = ?;';
+        await db.query(query1, [
+            data.update_customer_store_id,
+            data.update_customer_store_customerID,
+            data.update_customer_store_locationID
+        ]);
+        const [[rows]] = await db.query(query2, [data.update_customer_store_id]);
+
+        console.log(`UPDATE Items. ID: ${data.update_customer_store_id} ` +
+            `Customer ID: ${rows.customer_ID} ` +
+            `Location ID: ${rows.location_ID}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/Customer_Stores');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
 
 // ########################################
 // ########## LISTENER

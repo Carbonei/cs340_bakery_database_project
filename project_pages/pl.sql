@@ -1,25 +1,29 @@
--- Citation for all procs except sp_DeleteStore and sp_CreateItem:
--- Copied Adapted from Exploration - Implementing CUD operations in your app
--- match our existing code
+-- Citation for all procedures with an additional source used for sp_DeleteStore and sp_CreateItem:
+-- Citation for all procedures:
+-- Date: 06/06/2026
+-- Copied AND Adapted from:
+-- Source URL: https://canvas.oregonstate.edu/courses/2042369/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26640205
+-- (a.k.a. "Exploration - Implementing CUD operations in your app" Canvas module)
 
 -- Citation for sp_DeleteStore
 -- Date: 06/06/2026
--- Copied from /OR/ Adapted from /OR/ Based on 
+-- Based on 
 -- (Explain degree of originality)
 -- Source URL: https://m365.cloud.microsoft/
--- If AI tools were used: AI was used to figure out why the console (when deleting from table on website) was 
--- reporting a null location_ID to be deleted. No code was copied, but its advice to check naming 
--- inconsistencies helped me narrow down the root cause.
+-- If AI tools were used: AI was used to figure out why the console (when deleting from table on website) 
+-- was reporting a null location_ID to be deleted. No code was copied, but its advice to check 
+-- naming inconsistencies helped me narrow down the root cause.
 -- (Explain the use of tools and include a summary of the prompts submitted to the AI tool)
 
 -- Citation for sp_CreateItem
 -- Date: 06/06/2026
--- Copied from /OR/ Adapted from /OR/ Based on 
+-- Based on 
 -- (Explain degree of originality)
 -- Source URL: https://m365.cloud.microsoft/
--- If AI tools were used: AI was used to figure out why the console (when inserting new record into table on website) 
--- was reporting that a foreign key constraint failed for location ID. No code was copied, but its advice made
--- me realize that I was sending just the location name and not the location ID from the database into the handlebars template.
+-- If AI tools were used: AI was used to figure out why the console (when inserting new record into 
+-- table on website) was reporting that a foreign key constraint failed for location ID. No code was
+-- copied, but its advice made me realize that I was sending just the location name and not the 
+-- location ID from the database into the handlebars template.
 -- (Explain the use of tools and include a summary of the prompts submitted to the AI tool)
 
 -- #############################
@@ -435,5 +439,44 @@ CREATE PROCEDURE sp_UpdateOrderedItem(IN oi_id INT, IN oi_order INT, IN oi_item 
 
 BEGIN
     UPDATE Ordered_Items SET order_ID = oi_order, item_ID = oi_item WHERE ordered_itemID = oi_id; 
+END //
+DELIMITER ;
+
+-- #############################
+-- UPDATE Store
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateStore;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateStore(IN s_location_id INT, IN s_location_name VARCHAR(50), IN s_total_transaction_count INT)
+
+BEGIN
+    UPDATE Stores SET location_name = s_location_name, total_transaction_count = s_total_transaction_count WHERE location_ID = s_location_id; 
+END //
+DELIMITER ;
+
+-- #############################
+-- UPDATE Item
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateItem;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateItem(IN i_item_id INT, IN i_item_cost DECIMAL(10, 2), IN i_item_name VARCHAR(50), IN i_location_ID INT)
+
+BEGIN
+    UPDATE Items SET item_cost = i_item_cost, item_name = i_item_name, location_ID = i_location_ID WHERE item_ID = i_item_id; 
+END //
+DELIMITER ;
+
+-- #############################
+-- UPDATE Customer_Store
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateCustomerStore;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateCustomerStore(IN cs_id INT, IN cs_customer_id INT, IN cs_location_id INT)
+
+BEGIN
+    UPDATE Customer_Stores SET customer_ID = cs_customer_id, location_ID = cs_location_id WHERE customer_StoreID = cs_id; 
 END //
 DELIMITER ;

@@ -56,8 +56,8 @@
 
 {{! UPDATE form }}
 <h2>Update a Store</h2>
-<form class='cuForm' id='update_store_form'>
-    <label for='update_location_id'>Location to Update*: </label>
+<form class='cuForm' id='update_store_form' method='POST' action='/Stores/update'>
+    <label for='update_location_id'>Store Location to Update*: </label>
     <select name='update_location_id' id='update_location_id' required>
         <option value='' disabled selected>Select a Location</option>
         {{#each Stores}}
@@ -70,10 +70,10 @@
     </select>
 
     <label for="update_location_name">Location Name:</label>
-    <input type='text' name='create_location_name' id='create_location_name' />
+    <input type='text' name='update_location_name' id='update_location_name' />
 
     <label for="update_transaction_count">Total Transaction Count:</label>
-    <input type='text' name='create_transaction_count' id='create_transaction_count' />
+    <input type='text' name='update_transaction_count' id='update_transaction_count' />
     <input type='submit' />
 </form>
 

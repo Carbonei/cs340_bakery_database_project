@@ -7,8 +7,9 @@
 -- Copied from /OR/ Adapted from /OR/ Based on 
 -- (Explain degree of originality)
 -- Source URL: https://m365.cloud.microsoft/
--- If AI tools were used: AI was used to debug why the console was reporting a null location_ID to be deleted. 
--- No code was used, but its advice to check naming inconsistencies helped me narrow down the root cause.
+-- If AI tools were used: AI was used to debug why the console (when deleting from table on website) was 
+-- reporting a null location_ID to be deleted. No code was used, but its advice to check naming 
+-- inconsistencies helped me narrow down the root cause.
 -- (Explain the use of tools and include a summary of the prompts submitted to the AI tool)
 
 -- #############################

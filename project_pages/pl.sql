@@ -1,6 +1,15 @@
--- Citation for the following code:
+-- Citation for all procs except sp_DeleteStore:
 -- Copied Adapted from Exploration - Implementing CUD operations in your app
 -- match our existing code
+
+-- Citation for sp_DeleteStore
+-- Date: 06/06/2026
+-- Copied from /OR/ Adapted from /OR/ Based on 
+-- (Explain degree of originality)
+-- Source URL: https://m365.cloud.microsoft/
+-- If AI tools were used: AI was used to debug why the console was reporting a null location_ID to be deleted. 
+-- No code was used, but its advice to check naming inconsistencies helped me narrow down the root cause.
+-- (Explain the use of tools and include a summary of the prompts submitted to the AI tool)
 
 -- #############################
 -- DELETE order
@@ -108,6 +117,107 @@ BEGIN
 END //
 DELIMITER ;
 
+-- #############################
+-- DELETE Store
+-- #############################
+DROP PROCEDURE IF EXISTS sp_DeleteStore;
+
+DELIMITER //
+CREATE PROCEDURE sp_DeleteStore(IN l_id INT)
+BEGIN
+    DECLARE error_message VARCHAR(255);
+
+    -- error handler
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        -- Rolls back the transaction on any error
+        ROLLBACK;
+        -- Displays the custom error message to the caller
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+         DELETE FROM Stores WHERE location_ID = l_id;
+
+        -- Executes if the input provided is an invalid location_ID (ROW_COUNT being 0 means no rows 
+        -- were affected after executing above DELETE query)
+         IF ROW_COUNT() = 0 THEN 
+             SET error_message = CONCAT('No matching record found in Stores for location_id ', l_id);
+             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+         END IF;
+         
+    COMMIT;
+
+END //
+DELIMITER ;
+
+-- #############################
+-- DELETE Item
+-- #############################
+DROP PROCEDURE IF EXISTS sp_DeleteItem;
+
+DELIMITER //
+CREATE PROCEDURE sp_DeleteItem(IN i_id INT)
+BEGIN
+    DECLARE error_message VARCHAR(255);
+
+    -- error handler
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        -- Rolls back the transaction on any error
+        ROLLBACK;
+        -- Displays the custom error message to the caller
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+         DELETE FROM Items WHERE item_ID = i_id;
+
+        -- Executes if the input provided is an invalid item_ID (ROW_COUNT being 0 means no rows 
+        -- were affected after executing above DELETE query)
+         IF ROW_COUNT() = 0 THEN 
+             SET error_message = CONCAT('No matching record found in Items for item_id ', i_id);
+             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+         END IF;
+         
+    COMMIT;
+
+END //
+DELIMITER ;
+
+-- #############################
+-- DELETE Customer_Store
+-- #############################
+DROP PROCEDURE IF EXISTS sp_DeleteCustomerStore;
+
+DELIMITER //
+CREATE PROCEDURE sp_DeleteCustomerStore(IN cs_id INT)
+BEGIN
+    DECLARE error_message VARCHAR(255);
+
+    -- error handler
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        -- Rolls back the transaction on any error
+        ROLLBACK;
+         -- Displays the custom error message to the caller
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+         DELETE FROM Customer_Stores WHERE customer_storeID = cs_id;
+
+        -- Executes if the input provided is an invalid customer_storeID (ROW_COUNT being 0 means no rows 
+        -- were affected after executing above DELETE query)
+         IF ROW_COUNT() = 0 THEN 
+             SET error_message = CONCAT('No matching record found in Customer_Stores for customer_storeID ', cs_id);
+             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+         END IF;
+         
+    COMMIT;
+
+END //
+DELIMITER ;
 
 -- #############################
 -- CREATE Customer

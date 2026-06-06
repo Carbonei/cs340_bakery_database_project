@@ -25,14 +25,15 @@
            
 
             {{! DELETE form }}
-            <form id='delete_stores_form'>
-                <input type='hidden' name='delete_location_id' value='{{this.location_id}}' />
+            <form id='delete_store_form' method='POST' action="/Stores/delete">
+                <input type='hidden' name='delete_location_id' value='{{this.location_ID}}' />
                 <input type='hidden' name='delete_location_name' value='{{this.location_name}}' />
                 <input type='hidden' name='delete_transaction_count' value='{{this.total_transaction_count}}' />
                 <td>
                     <button type='submit'>
                         Delete
-              </td>
+                    </button>
+                </td>
             </form>
         </tr>
         {{/each}}

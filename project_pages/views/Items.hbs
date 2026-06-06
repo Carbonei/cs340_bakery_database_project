@@ -26,7 +26,7 @@
            
 
             {{! DELETE form }}
-            <form id='delete_item_form'>
+            <form id='delete_item_form' method='POST' action='/Items/delete'>
                 <input type='hidden' name='delete_item_id' value='{{this.item_ID}}' />
                 <input type='hidden' name='delete_item_cost' value='{{this.item_cost}}' />
                 <input type='hidden' name='delete_item_name' value='{{this.item_name}}' />
@@ -34,7 +34,8 @@
                 <td>
                     <button type='submit'>
                         Delete
-              </td>
+                    </button>
+                </td>
             </form>
         </tr>
         {{/each}}

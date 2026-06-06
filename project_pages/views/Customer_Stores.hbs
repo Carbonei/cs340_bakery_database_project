@@ -30,7 +30,7 @@
 
 
             {{! DELETE form }}
-            <form id='delete_customer_store_form'>
+            <form id='delete_customer_store_form' method='POST' action='/Customer_Stores/delete'>
                 <input type='hidden' name='delete_customer_store_id' value='{{this.customer_storeID}}' />
                 <input type='hidden' name='delete_customer_store_customerID' value='{{this.customer_ID}}' />
                 <input type='hidden' name='delete_customer_store_customer_fname' value='{{this.first_name}}' />
@@ -41,7 +41,8 @@
                 <td>
                     <button type='submit'>
                         Delete
-              </td>
+                    </button>
+                </td>
             </form>
         </tr>
         {{/each}}

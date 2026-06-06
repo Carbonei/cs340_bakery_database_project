@@ -401,6 +401,72 @@ app.post('/Ordered_Items/delete', async function (req, res) {
     }
 });
 
+// DELETE Stores ROUTES
+app.post('/Stores/delete', async function (req, res) {
+    try {
+        // Reads the information as per the template specifications
+        let data = req.body;
+        console.log(data.delete_location_id);
+       
+        const query1 = `CALL sp_DeleteStore(?);`;
+        // Sends in the delete_location_id value as the argument for sp_DeleteStore()
+        await db.query(query1, [data.delete_location_id]);
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Stores');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// DELETE Items ROUTES
+app.post('/Items/delete', async function (req, res) {
+    try {
+        // Reads the information as per the template specifications
+        let data = req.body;
+        console.log(data.delete_item_id);
+       
+        const query1 = `CALL sp_DeleteItem(?);`;
+        // Sends in the delete_item_id value as the argument for sp_DeleteItem()
+        await db.query(query1, [data.delete_item_id]);
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Items');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// DELETE Customer_Stores ROUTES
+app.post('/Customer_Stores/delete', async function (req, res) {
+    try {
+        // Reads the information as per the template specifications
+        let data = req.body;
+        console.log(data.delete_customer_store_id);
+       
+        const query1 = `CALL sp_DeleteCustomerStore(?);`;
+        // Sends in the delete_customer_store_id value as the argument for sp_DeleteCustomerStore()
+        await db.query(query1, [data.delete_customer_store_id]);
+
+        // Redirect the user to the updated webpage
+        res.redirect('/Customer_Stores');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 // CREATE ROUTES
 
 // Create Order Route

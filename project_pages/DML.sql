@@ -1,4 +1,4 @@
--- Citation: queries are inspired by sample_data_manipultaion.sql provided in Web Exploration module https://canvas.oregonstate.edu/courses/2042369/assignments/10464663?module_item_id=26640192
+-- Citation: Date: 5/8/2026 below queries are inspired by sample_data_manipultaion.sql provided in Web Exploration module https://canvas.oregonstate.edu/courses/2042369/assignments/10464663?module_item_id=26640192
 
 -- Customers Queries
 

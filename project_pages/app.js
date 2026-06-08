@@ -1,13 +1,22 @@
 // ########################################
 // ########## SETUP
 
-//Citation: based on Web Exploration Canvas Module
+// Citation for all app.get('/<entity_name>', async function (req, res): 
+// Date: 5/8/2026 
+// Based on Web Application Technology Exploration Canvas module:
+// https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
 
-//{{! Citation for use of AI Tools:
-//      # Date: 6/8/2026
-//      # Prompts used to generate prepopulation of non-primary attributes when primary key 
-//      # is selected for update route. Current update form and update route was provided to copilot.
-//      # AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW }}
+// Citation for all app.post('/<entity_name>/<CRUD-op-type>', async function (req, res):
+// Date: 5/8/2026
+// Based on Implementing CUD operations in your app Exploration Canvas module:
+// https://canvas.oregonstate.edu/courses/2042369/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26640205
+
+// Citation for all app.get('/<entity_name>/:id', async function (req, res):
+// Date: 6/8/2026
+// Copied, Adapted from:
+// AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW// 
+// Prompts used to generate prepopulation of non-primary attributes when primary key
+// is selected for update route. Current update form and update route was provided to copilot.
 
 // Express
 const express = require('express');

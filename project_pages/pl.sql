@@ -1,30 +1,25 @@
 -- Citation for all procedures with an additional source used for sp_DeleteStore and sp_CreateItem:
 -- Citation for all procedures:
 -- Date: 06/06/2026
--- Copied AND Adapted from:
--- Source URL: https://canvas.oregonstate.edu/courses/2042369/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26640205
--- (a.k.a. "Exploration - Implementing CUD operations in your app" Canvas module)
+-- Copied, Adapted from Implementing CUD operations in your app Exploration Canvas module:
+-- https://canvas.oregonstate.edu/courses/2042369/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26640205
 
 -- Citation for sp_DeleteStore
 -- Date: 06/06/2026
--- Based on 
--- (Explain degree of originality)
--- Source URL: https://m365.cloud.microsoft/
--- If AI tools were used: AI was used to figure out why the console (when deleting from table on website) 
+-- Based on:
+-- https://m365.cloud.microsoft/
+-- AI was used to figure out why the console (when deleting from table on website) 
 -- was reporting a null location_ID to be deleted. No code was copied, but its advice to check 
 -- naming inconsistencies helped me narrow down the root cause.
--- (Explain the use of tools and include a summary of the prompts submitted to the AI tool)
 
 -- Citation for sp_CreateItem
 -- Date: 06/06/2026
--- Based on 
--- (Explain degree of originality)
--- Source URL: https://m365.cloud.microsoft/
--- If AI tools were used: AI was used to figure out why the console (when inserting new record into 
--- table on website) was reporting that a foreign key constraint failed for location ID. No code was
--- copied, but its advice made me realize that I was sending just the location name and not the 
--- location ID from the database into the handlebars template.
--- (Explain the use of tools and include a summary of the prompts submitted to the AI tool)
+-- Based on: 
+-- https://m365.cloud.microsoft/
+-- AI was used to figure out why the console (when inserting new record into table on website) was 
+-- reporting that a foreign key constraint failed for location ID. No code was copied, but its advice 
+-- made me realize that I was sending just the location name and not the location ID from the database 
+-- into the handlebars template.
 
 -- #############################
 -- DELETE order

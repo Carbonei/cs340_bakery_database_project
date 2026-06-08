@@ -21,82 +21,127 @@ Stores, an intersection table named Customer_Stores records which customer visit
 ## Citations: 
 
 ### DDL.sql:
-Date: 5/26/2026\
-Copied Adapted from sp_moviedb.sql in Project Step 4 Draft example code\
-referenced procedure beginning and end syntax and altered it to\
+Date: 5/26/2026
+Based on, adapted from sp_moviedb.sql in Project Step 4 Draft example code: 
+https://canvas.oregonstate.edu/courses/2042369/assignments/10464666
+Referenced procedure beginning and end syntax and altered it to 
 match our existing code
 
 ### DML.sql:
 Date: 5/8/2026\
-Queries are adapted from sample_data_manipultaion.sql provided in\
-Web Exploration module https://canvas.oregonstate.edu/courses/2042369/assignments/10464663?module_item_id=26640192
+Based on Web Application Technology Exploration Canvas module:\
+https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188 \
+Below queries are inspired by sample_data_manipultaion.sql from source.
 
 ### app.js:
 Date: 5/8/2026\
 Routes adapted from Web Exploration Canvas Module:\
-https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188 
+https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
+
+#### All app.get('/<entity_name>', async function (req, res): 
+Date: 5/8/2026\
+Adapted from Web Application Technology Exploration Canvas module:\
+https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
+
+#### All app.post('/<entity_name>/<CRUD-op-type>', async function (req, res): 
+Date: 5/8/2026\
+Adapted from Implementing CUD operations in your app Exploration Canvas module:\
+https://canvas.oregonstate.edu/courses/2042369/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26640205
+
+#### All app.get('/<entity_name>/:id', async function (req, res):
+Date: 6/8/2026\
+Copied, Adapted from:\
+AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW \
+Prompts used to generate prepopulation of non-primary attributes when primary key\
+is selected for update route. Current update form and update route was provided to copilot. 
 
 ### pl.sql:
 Citation for all procedures with an additional source used for sp_DeleteStore and sp_CreateItem:\
 Citation for all procedures:\
 Date: 06/06/2026\
-Copied AND Adapted from:\
-Source URL: https://canvas.oregonstate.edu/courses/2042369/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26640205\
-(a.k.a. "Exploration - Implementing CUD operations in your app" Canvas module)
+Copied, Adapted from Implementing CUD operations in your app Exploration Canvas module:
+https://canvas.oregonstate.edu/courses/2042369/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26640205
 
 #### Citation for sp_DeleteStore
 Date: 06/06/2026\
-Based on\
-Source URL: https://m365.cloud.microsoft/  
-If AI tools were used: AI was used to figure out why the console (when deleting from table on website)\
+Based on:
+https://m365.cloud.microsoft/  
+AI was used to figure out why the console (when deleting from table on website)\
 was reporting a null location_ID to be deleted. No code was copied, but its advice to check\
 naming inconsistencies helped me narrow down the root cause.
 
 #### Citation for sp_CreateItem
 Date: 06/06/2026\
-Based on\
-Source URL: https://m365.cloud.microsoft/  
-If AI tools were used: AI was used to figure out why the console (when inserting new record into\
-table on website) was reporting that a foreign key constraint failed for location ID. No code was\
-copied, but its advice made me realize that I was sending just the location name and not the\
-location ID from the database into the handlebars template.
+Based on:\
+https://m365.cloud.microsoft/
+AI was used to figure out why the console (when inserting new record into table on website) was 
+reporting that a foreign key constraint failed for location ID. No code was copied, but its advice 
+made me realize that I was sending just the location name and not the location ID from the database 
+into the handlebars template.
 
 #### main.hbs:
 Date: 5/8/2026\
-Adapted from Web Exploration Module:  
+Adapted from Web Application Technology Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188 
 
 #### Customer_Stores.hbs:
 Date: 5/8/2026\
-Adapted from Web Exploration Module:  
+Adapted from Web Application Technology Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188 
 
 #### Customers.hbs:
 Date: 5/8/2026\
-Adapted from Web Exploration Module:  
+Adapted from Web Application Technology Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188 
+
+##### Citation for <script> content:
+Date: 6/8/2026\
+Copied, Adapted from:\
+AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW  
+Prompts used to generate prepopulation of non-primary attributes when primary key\
+is selected for update route. Current update form and update route was provided to copilot.
 
 #### Items.hbs:
 Date: 5/8/2026\
-Adapted from Web Exploration Module:  
+Adapted from Web Application Technology Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188 
+
+##### Citation for <script> content:
+Date: 6/8/2026\
+Copied, Adapted from:\
+AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW  
+Prompts used to generate prepopulation of non-primary attributes when primary key\
+is selected for update route. Current update form and update route was provided to copilot.
 
 #### Ordered_Items.hbs:
 Date: 5/8/2026\
-Adapted from Web Exploration Module:  
+Adapted from Web Application Technology Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188 
 
 #### Orders.hbs:
 Date: 5/8/2026\
-Adapted from Web Exploration Module:  
+Adapted from Web Application Technology Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188 
+
+##### Citation for <script> content:
+Date: 6/8/2026\
+Copied, Adapted from:\
+AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW  
+Prompts used to generate prepopulation of non-primary attributes when primary key\
+is selected for update route. Current update form and update route was provided to copilot.
 
 #### Stores.hbs:
 Date: 5/8/2026\
-Adapted from Web Exploration Module:  
+Adapted from Web Application Technology Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188 
+##### Citation for <script> content:
+Date: 6/8/2026\
+Copied, Adapted from:\
+AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW  
+Prompts used to generate prepopulation of non-primary attributes when primary key\
+is selected for update route. Current update form and update route was provided to copilot.
 
 #### Database-connector.js:
 Date: 5/8/2026\
-Adapted from Web Exploration Module:  
+Adapted from Web Application Technology Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188

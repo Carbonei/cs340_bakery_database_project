@@ -1,4 +1,8 @@
--- Citation: Date: 5/8/2026 below queries are inspired by sample_data_manipultaion.sql provided in Web Exploration module https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
+-- Citation: 
+-- Date: 5/8/2026 
+-- Based on Web Application Technology Exploration Canvas module: 
+-- https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
+-- Below queries are inspired by sample_data_manipultaion.sql from source.
 
 -- Customers Queries
 

@@ -1,7 +1,8 @@
 -- Citation for the following code:
 -- Date: 5/26/2026
--- Copied Adapted from sp_moviedb.sql in Project Step 4 Draft example code
--- referenced procedure beginning and end syntax and altered it to 
+-- Based on, adapted from sp_moviedb.sql in Project Step 4 Draft example code: 
+-- https://canvas.oregonstate.edu/courses/2042369/assignments/10464666
+-- Referenced procedure beginning and end syntax and altered it to 
 -- match our existing code
 
 DROP PROCEDURE IF EXISTS sp_load_bakerydb;

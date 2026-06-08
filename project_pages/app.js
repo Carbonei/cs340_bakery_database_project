@@ -3,6 +3,11 @@
 
 //Citation: based on Web Exploration Canvas Module
 
+//{{! Citation for use of AI Tools:
+//      # Date: 6/8/2026
+//      # Prompts used to generate prepopulation of non-primary attributes when primary key 
+//      # is selected for update route. Current update form and update route was provided to copilot.
+//      # AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW }}
 
 // Express
 const express = require('express');

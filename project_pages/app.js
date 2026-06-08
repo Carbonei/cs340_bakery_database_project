@@ -903,6 +903,27 @@ app.post('/Customer_Stores/update', async function (req, res) {
     }
 });
 
+
+// Fetch one customer's data 
+app.get('/Customers/:id', async function (req, res) {
+    try {
+        const customerID = req.params.id;
+        const [rows] = await db.query(
+            'SELECT first_name, last_name, email FROM Customers WHERE customer_ID = ?',
+            [customerID]
+        );
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'Customer not found' });
+        }
+
+        res.json(rows[0]);
+    } catch (error) {
+        console.error('Error fetching customer:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 // ########################################
 // ########## LISTENER
 

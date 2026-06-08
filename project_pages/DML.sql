@@ -32,9 +32,9 @@ DELETE FROM Stores WHERE Location_ID = :location_ID_selected_from_Stores_page;
 
 -- Select used to display information on the Orders, the Customer who placed the order, and the location it was purchased from.
 SELECT Orders.order_ID, Orders.order_cost, Orders.item_count, Orders.pickup AS pickup_date, Customers.first_name, Customers.last_name, 
-            Stores.location_name FROM Orders
-            LEFT JOIN Customers ON Orders.customer_ID = Customers.customer_ID
-            LEFT JOIN Stores ON Orders.location_ID = Stores.location_ID;
+    Stores.location_name FROM Orders
+    LEFT JOIN Customers ON Orders.customer_ID = Customers.customer_ID
+    LEFT JOIN Stores ON Orders.location_ID = Stores.location_ID;
 
 -- Select used to display store-related info in dropdown
 SELECT Stores.location_ID, Stores.location_name FROM Stores;
@@ -43,13 +43,9 @@ SELECT Stores.location_ID, Stores.location_name FROM Stores;
 SELECT Customers.first_name, Customers.last_name, Customers.customer_ID FROM Customers;
 
 -- Insert into Orders using form on /Orders page
--- INSERT INTO Orders (order_cost, item_count, pickup, customer_ID, location_ID) VALUES (:order_costInput, :item_countInput, :pickupInput, 
-                --    (SELECT Customer_ID FROM Customers WHERE Customers.first_name = :first_name_from_dropdown_menu AND Customers.last_name = :last_name_from_dropdown_menu), 
-                --    (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
-
 INSERT INTO Orders (customer_ID, order_cost, item_count, pickup, location_ID) VALUES ((SELECT Customer_ID FROM Customers WHERE Customers.first_name = :first_name_from_dropdown_menu AND Customers.last_name = :last_name_from_dropdown_menu), 
-                    :order_costInput, :item_countInput, 
-                    (SELECT Customer_ID FROM Customers WHERE Customers.first_name = :first_name_from_dropdown_menu AND Customers.last_name = :last_name_from_dropdown_menu));
+    :order_costInput, :item_countInput, 
+    (SELECT Customer_ID FROM Customers WHERE Customers.first_name = :first_name_from_dropdown_menu AND Customers.last_name = :last_name_from_dropdown_menu));
 
 -- Update Existing Order  
 UPDATE Orders SET order_cost = :order_costInput, item_count = :item_countInput, pickup = :pickupInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu) 
@@ -62,15 +58,15 @@ DELETE FROM Orders WHERE order_ID = :order_ID_selected_from_Orders_page;
 
 -- Select info used to display information on the Items
 SELECT Items.item_ID, Items.item_cost, Items.item_name, 
-        Stores.location_name FROM Items
-        LEFT JOIN Stores on Items.location_ID = Stores.location_ID;
+    Stores.location_name FROM Items
+    LEFT JOIN Stores on Items.location_ID = Stores.location_ID;
 
 -- Used to display the store-related info in dropdown
 SELECT Stores.location_ID, Stores.location_name FROM Stores;
 
 -- Insert into Items in the following order on /Items page
 INSERT INTO Items (item_cost, item_name, location_ID) VALUES (:item_costInput, :item_nameInput, 
-                    (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
+    (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
 
 -- Update existing Item
 UPDATE Items SET item_cost = :item_costInput, item_name = :item_nameInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu)
@@ -94,7 +90,7 @@ SELECT Stores.location_ID, Stores.location_name FROM Stores;
 
 -- Inserts a new Customer_Store into Customer_Stores table
 INSERT INTO Customer_Stores (customer_ID, location_ID) VALUES ((SELECT customer_ID FROM Customers WHERE Customers.customer_ID = :customerID_from_dropdown_menu),  
-                    (SELECT location_ID FROM Stores WHERE Stores.location_ID = :locationID_from_dropdown_menu));
+    (SELECT location_ID FROM Stores WHERE Stores.location_ID = :locationID_from_dropdown_menu));
 
 -- Update Existing Customer_Store  
 UPDATE Customer_Stores SET customer_ID = (SELECT customer_ID FROM Customers WHERE Customers.customer_ID = :customerID_from_dropdown_menu), location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_ID = :locationID_from_dropdown_menu) 

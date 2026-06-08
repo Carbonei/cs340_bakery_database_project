@@ -49,7 +49,8 @@ BEGIN
         DELETE FROM Orders WHERE order_ID = o_id;
       
 
-        -- ROW_COUNT() returns the number of rows affected by the preceding statement.
+        -- Executes if the input provided is an invalid order_ID (ROW_COUNT being 0 means no rows 
+        -- were affected after executing above DELETE query)
         IF ROW_COUNT() = 0 THEN
             set error_message = CONCAT('No matching record found in Orders for id: ', o_id);
             -- Trigger custom error, invoke EXIT HANDLER
@@ -85,7 +86,8 @@ BEGIN
         DELETE FROM Customers WHERE customer_ID = c_id;
       
 
-        -- ROW_COUNT() returns the number of rows affected by the preceding statement.
+        -- Executes if the input provided is an invalid customer_ID (ROW_COUNT being 0 means no rows 
+        -- were affected after executing above DELETE query)
         IF ROW_COUNT() = 0 THEN
             set error_message = CONCAT('No matching record found in Customers for id: ', c_id);
             -- Trigger custom error, invoke EXIT HANDLER
@@ -120,7 +122,8 @@ BEGIN
         DELETE FROM Ordered_Items WHERE ordered_itemID = oi_id;
       
 
-        -- ROW_COUNT() returns the number of rows affected by the preceding statement.
+        -- Executes if the input provided is an invalid ordered_itemID (ROW_COUNT being 0 means no rows 
+        -- were affected after executing above DELETE query)
         IF ROW_COUNT() = 0 THEN
             set error_message = CONCAT('No matching record found in Ordered Items for id: ', oi_id);
             -- Trigger custom error, invoke EXIT HANDLER
@@ -256,12 +259,9 @@ BEGIN
 
     -- Store the ID of the last inserted row
     SELECT LAST_INSERT_ID() into c_id;
-    -- Display the ID of the last inserted person.
+    -- Display the ID of the last inserted customer.
     SELECT LAST_INSERT_ID() AS 'new_id';
 
-    -- Example of how to get the ID of the newly created person:
-        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
-        -- SELECT @new_id AS 'New Person ID';
 END //
 DELIMITER ;
 
@@ -289,7 +289,6 @@ BEGIN
     SELECT LAST_INSERT_ID() into o_id;
     -- Display the ID of the last inserted order.
     SELECT LAST_INSERT_ID() AS 'new_id';
-
     
 END //
 DELIMITER ;
@@ -312,12 +311,9 @@ BEGIN
 
     -- Store the ID of the last inserted row
     SELECT LAST_INSERT_ID() into oi_id;
-    -- Display the ID of the last inserted person.
+    -- Display the ID of the last inserted item.
     SELECT LAST_INSERT_ID() AS 'new_id';
 
-    -- Example of how to get the ID of the newly created person:
-        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
-        -- SELECT @new_id AS 'New Person ID';
 END //
 DELIMITER ;
 
@@ -341,9 +337,6 @@ BEGIN
     -- Display the ID of the last inserted location
     SELECT LAST_INSERT_ID() AS 'new_location_id';
 
-    -- Example of how to get the ID of the newly created person:
-        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
-        -- SELECT @new_id AS 'New Person ID';
 END //
 DELIMITER ;
 
@@ -368,9 +361,6 @@ BEGIN
     -- Display the ID of the last inserted item
     SELECT LAST_INSERT_ID() AS 'new_item_id';
 
-    -- Example of how to get the ID of the newly created person:
-        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
-        -- SELECT @new_id AS 'New Person ID';
 END //
 DELIMITER ;
 
@@ -394,9 +384,6 @@ BEGIN
     -- Display the ID of the last inserted item
     SELECT LAST_INSERT_ID() AS 'new_cs_id';
 
-    -- Example of how to get the ID of the newly created person:
-        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
-        -- SELECT @new_id AS 'New Person ID';
 END //
 DELIMITER ;
 

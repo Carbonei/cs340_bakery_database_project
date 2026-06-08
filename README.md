@@ -50,7 +50,7 @@ Based on\
 Source URL: https://m365.cloud.microsoft/  
 If AI tools were used: AI was used to figure out why the console (when deleting from table on website)\
 was reporting a null location_ID to be deleted. No code was copied, but its advice to check\
-naming inconsistencies helped me narrow down the root cause.\
+naming inconsistencies helped me narrow down the root cause.
 
 #### Citation for sp_CreateItem
 Date: 06/06/2026\

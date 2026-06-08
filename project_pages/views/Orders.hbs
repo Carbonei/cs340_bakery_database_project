@@ -101,17 +101,17 @@
     </select>
     
     <label for='update_order_cost'>Order Cost*:</label>
-    <input type='text' name='update_order_cost' id='update_order_cost' />
+    <input type='text' name='update_order_cost' id='update_order_cost' required/>
 
     <label for='update_order_item_count'>Item count*:</label>
-    <input type='text' name='update_order_item_count' id='update_order_item_count' />
+    <input type='text' name='update_order_item_count' id='update_order_item_count' required/>
 
     <label for='update_order_pickup'>Pickup Date*(enter in 'YYYY-MM-DD' format): </label>
-    <input type='text' name='update_order_pickup' id='update_order_pickup' />
+    <input type='text' name='update_order_pickup' id='update_order_pickup' required/>
 
     <label for='update_order_location_ID'>Location Name*: </label>
-    <select name='update_order_location_ID' id='update_order_location_ID'>
-        <option value='NULL' disabled selected>Select a Location</option>
+    <select name='update_order_location_ID' id='update_order_location_ID' required>
+        <option value='' disabled selected>Select a Location</option>
         {{#each locations}}
         <option value='{{this.location_ID}}' required>
             {{this.location_name}}
@@ -120,6 +120,22 @@
     </select>
     <input type='submit' />
 </form>
+
+<script>
+document.getElementById('update_order_id').addEventListener('change', async function () {
+    const id = this.value;
+
+    if (!id) return;
+
+    const res = await fetch(`/Orders/${id}`);
+    const data = await res.json();
+
+    document.getElementById('update_order_cost').value = data.order_cost || '';
+    document.getElementById('update_order_item_count').value = data.item_count || '';
+    document.getElementById('update_order_pickup').value = data.pickup || '';
+    document.getElementById('update_order_location_ID').value = data.location_ID || '';
+});
+</script>
 
 <h2>Reset Data</h2>
 

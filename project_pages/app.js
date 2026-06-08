@@ -929,6 +929,27 @@ app.get('/Customers/:id', async function (req, res) {
     }
 });
 
+//get one order data
+app.get('/Orders/:id', async function (req, res) {
+    try {
+        const order_ID = req.params.id;
+        const [rows] = await db.query(
+            'SELECT order_cost, item_count, pickup, location_ID FROM Orders WHERE order_ID = ?',
+            [order_ID]
+        );
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'Order not found' });
+        }
+
+        res.json(rows[0]);
+    } catch (error) {
+        console.error('Error fetching Order:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+
 // ########################################
 // ########## LISTENER
 

@@ -1,3 +1,8 @@
+/*Citation:
+ Date: 05/20/2026 
+ Copied from Google fonts for CSS display fonts: 
+ https://fonts.google.com/ */
+
 body {
     margin: 0;
     padding: 0;
@@ -8,9 +13,6 @@ nav {
     font-weight: 400;
     font-style: normal;
 }
-/*.nav-bar {
-    background-color: lemonchiffon;
-}*/
 h1 {
     margin-left: 16px;
     font-family: "Marcellus", serif;

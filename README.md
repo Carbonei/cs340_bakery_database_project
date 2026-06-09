@@ -141,7 +141,12 @@ AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs
 Prompts used to generate prepopulation of non-primary attributes when primary key\
 is selected for update route. Current update form and update route was provided to copilot.
 
-#### Database-connector.js:
+#### database/db-connector.js:
 Date: 5/8/2026\
 Adapted from Web Application Technology Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
+
+#### style.css
+ Date: 05/20/2026 
+ Copied from Google fonts for CSS display fonts: 
+ https://fonts.google.com/

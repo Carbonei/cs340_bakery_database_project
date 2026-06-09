@@ -1,11 +1,3 @@
-// ########################################
-// ########## SETUP
-
-// Citation for all app.get('/<entity_name>', async function (req, res): 
-// Date: 5/8/2026 
-// Based on Web Application Technology Exploration Canvas module:
-// https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
-
 // Citation for all app.post('/<entity_name>/<CRUD-op-type>', async function (req, res):
 // Date: 5/8/2026
 // Based on Implementing CUD operations in your app Exploration Canvas module:
@@ -17,6 +9,11 @@
 // AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW// 
 // Prompts used to generate prepopulation of non-primary attributes when primary key
 // is selected for update route. Current update form and update route was provided to copilot.
+
+// Citation for all other source code: 
+// Date: 5/8/2026 
+// Based on Web Application Technology Exploration Canvas module:
+// https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
 
 // Express
 const express = require('express');
@@ -989,9 +986,6 @@ app.get('/Items/:id', async function (req, res) {
         res.status(500).json({ error: 'Server error' });
     }
 });
-
-// ########################################
-// ########## LISTENER
 
 app.listen(PORT, function () {
     console.log(

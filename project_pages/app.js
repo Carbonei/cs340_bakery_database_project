@@ -327,14 +327,6 @@ app.post('/Items/reset', async function (req, res) {
     }
 });
 
-//-- Citation for the following code:
-//-- Date: 5/26/2026
-// Adapted from "Exploration - Implementing CUD operations in your app" 
-//  example code
-// -- referenced procedure beginning and end syntax and altered it to 
-// -- match our existing code
-
-
 // DELETE ROUTES
 app.post('/Orders/delete', async function (req, res) {
     try {
@@ -565,7 +557,7 @@ app.post('/Customers/create', async function (req, res) {
         ]);
 
         console.log(`CREATE Customer ID: ${rows.new_id} ` +
-            `Name: ${data.create_person_first_name} ${data.create_person_last_name}`
+            `Name: ${data.create_customer_first_name} ${data.create_customer_last_name}`
         );
 
         // Redirect the user to the updated webpage
@@ -958,6 +950,45 @@ app.get('/Orders/:id', async function (req, res) {
     }
 });
 
+// Fetch one store's data 
+app.get('/Stores/:id', async function (req, res) {
+    try {
+        const locationID = req.params.id;
+        const [rows] = await db.query(
+            'SELECT location_name, total_transaction_count FROM Stores WHERE location_ID = ?',
+            [locationID]
+        );
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'Store not found' });
+        }
+
+        res.json(rows[0]);
+    } catch (error) {
+        console.error('Error fetching store:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+// Fetch one item's data 
+app.get('/Items/:id', async function (req, res) {
+    try {
+        const itemID = req.params.id;
+        const [rows] = await db.query(
+            'SELECT item_cost, item_name, location_ID FROM Items WHERE item_ID = ?',
+            [itemID]
+        );
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'Item not found' });
+        }
+
+        res.json(rows[0]);
+    } catch (error) {
+        console.error('Error fetching item:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 
 // ########################################
 // ########## LISTENER

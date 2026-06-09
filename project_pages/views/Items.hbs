@@ -88,8 +88,6 @@
         {{#each Items}}
         <option value='{{this.item_ID}}' required>
             {{this.item_ID}}
-
-            {{this.item_name}}
         </option>
         {{/each}}
     </select>
@@ -112,6 +110,21 @@
 
     <input type='submit' />
 </form>
+
+<script>
+document.getElementById('update_item_id').addEventListener('change', async function () {
+    const id = this.value;
+
+    if (!id) return;
+
+    const res = await fetch(`/Items/${id}`);
+    const data = await res.json();
+
+    document.getElementById('update_item_cost').value = data.item_cost || '';
+    document.getElementById('update_item_name').value = data.item_name || '';
+    document.getElementById('update_item_location_id').value = data.location_ID || '';
+});
+</script>
 
 <h2>Reset Data</h2>
 

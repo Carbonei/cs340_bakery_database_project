@@ -9,7 +9,7 @@
     Copied, Adapted from:
     AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW// 
     Prompts used to generate prepopulation of non-primary attributes when primary key
-    is selected for update route. Current update form and update route was provided to copilot.
+    is selected for update route. Current update form and update route was provided to copilot. }}
 
 <h1>Stores</h1>
 
@@ -89,6 +89,20 @@
     <input type='text' name='update_transaction_count' id='update_transaction_count' />
     <input type='submit' />
 </form>
+
+<script>
+document.getElementById('update_location_id').addEventListener('change', async function () {
+    const id = this.value;
+
+    if (!id) return;
+
+    const res = await fetch(`/Stores/${id}`);
+    const data = await res.json();
+
+    document.getElementById('update_location_name').value = data.location_name || '';
+    document.getElementById('update_transaction_count').value = data.total_transaction_count || '';
+});
+</script>
 
 <h2>Reset Data</h2>
 

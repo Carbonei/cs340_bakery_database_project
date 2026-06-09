@@ -34,16 +34,8 @@ https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application
 Below queries are inspired by sample_data_manipultaion.sql from source.
 
 ### app.js:
-Date: 5/8/2026\
-Routes adapted from Web Exploration Canvas Module:\
-https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
 
-#### All app.get('/<entity_name>', async function (req, res): 
-Date: 5/8/2026\
-Adapted from Web Application Technology Exploration Canvas module:\
-https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
-
-#### All app.post('/<entity_name>/<CRUD-op-type>', async function (req, res): 
+#### All app.post('/<entity_name>/<CRUD_op_type>', async function (req, res): 
 Date: 5/8/2026\
 Adapted from Implementing CUD operations in your app Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26640205
@@ -54,6 +46,11 @@ Copied, Adapted from:\
 AI Source URL: https://copilot.microsoft.com/conversations/join/4RwnCEkWuu6YMEjs7zxrW \
 Prompts used to generate prepopulation of non-primary attributes when primary key\
 is selected for update route. Current update form and update route was provided to copilot. 
+
+#### All other source code: 
+Date: 5/8/2026\
+Based on Web Application Technology Exploration Canvas module:\
+https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188
 
 ### pl.sql:
 Citation for all procedures with an additional source used for sp_DeleteStore and sp_CreateItem:\
@@ -80,9 +77,15 @@ made me realize that I was sending just the location name and not the location I
 into the handlebars template.
 
 #### main.hbs:
+##### Citation for structure:
 Date: 5/8/2026\
 Adapted from Web Application Technology Exploration Canvas module:\
 https://canvas.oregonstate.edu/courses/2042369/pages/exploration-web-application-technology-2?module_item_id=26640188 
+
+##### Citation for fonts:
+Date: 05/20/2026\
+Copied from Google fonts for CSS display fonts:\
+https://fonts.google.com/
 
 #### Customer_Stores.hbs:
 Date: 5/8/2026\

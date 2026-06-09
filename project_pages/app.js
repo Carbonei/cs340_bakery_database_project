@@ -1,4 +1,4 @@
-// Citation for all app.post('/<entity_name>/<CRUD-op-type>', async function (req, res):
+// Citation for all app.post('/<entity_name>/<CRUD_op_type>', async function (req, res):
 // Date: 5/8/2026
 // Based on Implementing CUD operations in your app Exploration Canvas module:
 // https://canvas.oregonstate.edu/courses/2042369/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26640205

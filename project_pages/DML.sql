@@ -12,6 +12,9 @@ SELECT Customers.customer_ID, Customers.first_name, Customers.last_name, Custome
 -- Insert into Customers using form on /Customers page
 INSERT INTO Customers (first_name, last_name, email) VALUES (:first_nameInput, :last_nameInput, :emailInput);
 
+-- Used to pre-populate non-PK input fields for Update section (after selects Customer ID)
+SELECT first_name, last_name, email FROM Customers WHERE customer_ID = :customer_ID_from_dropdown_menu;
+
 -- Update Existing Customer  
 UPDATE Customers SET first_name = :first_nameInput, last_name = :last_nameInput, email = :emailInput WHERE customer_ID = :customer_ID_from_dropdown_menu;
 
@@ -25,6 +28,9 @@ SELECT Stores.location_ID, Stores.location_name, Stores.total_transaction_count 
 
 -- Insert into Stores in the following order on /Stores page
 INSERT INTO Stores (location_name, total_transaction_count) VALUES (:location_nameInput, :total_transaction_countInput);
+
+-- Used to pre-populate non-PK input fields for Update section (after user selects Location ID)
+SELECT location_name, total_transaction_count FROM Stores WHERE location_ID = :location_ID_from_dropdown_menu;
 
 -- Update existing store
 UPDATE Stores SET location_name = :location_nameInput, total_transaction_count = :total_transaction_countInput WHERE location_ID= :location_ID_from_dropdown_menu;
@@ -45,6 +51,9 @@ SELECT Stores.location_ID, Stores.location_name FROM Stores;
 
 -- Select used to display customer-related info in dropdown
 SELECT Customers.first_name, Customers.last_name, Customers.customer_ID FROM Customers;
+
+-- Used to pre-populate non-PK input fields for Update section (after user selects Order ID)
+SELECT order_cost, item_count, pickup, location_ID FROM Orders WHERE order_ID = :order_ID_from_dropdown_menu;
 
 -- Insert into Orders using form on /Orders page
 INSERT INTO Orders (customer_ID, order_cost, item_count, pickup, location_ID) VALUES ((SELECT Customer_ID FROM Customers WHERE Customers.first_name = :first_name_from_dropdown_menu AND Customers.last_name = :last_name_from_dropdown_menu), 
@@ -71,6 +80,9 @@ SELECT Stores.location_ID, Stores.location_name FROM Stores;
 -- Insert into Items in the following order on /Items page
 INSERT INTO Items (item_cost, item_name, location_ID) VALUES (:item_costInput, :item_nameInput, 
     (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu));
+
+-- Used to pre-populate non-PK input fields for Update section (after user selects Item ID)
+SELECT item_cost, item_name, location_ID FROM Items WHERE item_ID = :item_ID_from_dropdown_menu;
 
 -- Update existing Item
 UPDATE Items SET item_cost = :item_costInput, item_name = :item_nameInput, location_ID = (SELECT location_ID FROM Stores WHERE Stores.location_name = :location_name_from_dropdown_menu)
